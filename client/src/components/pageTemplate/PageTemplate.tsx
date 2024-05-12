@@ -1,38 +1,50 @@
 import { FC, PropsWithChildren } from "react";
-import { AppContainer, Footer, Header, IHeaderLink } from "..";
+import { Footer, Header } from "../../components";
 import "./PageTemplate.style.css";
+import { AppContainer } from "../../ui";
+import { RouterPaths } from "../../constants";
+import { ILinkItem } from "../../types";
 
 export const PageTemplate: FC<PropsWithChildren> = ({ children }) => {
-  const navLinksHeader: IHeaderLink[] = [
+  const navLinksHeader: ILinkItem[] = [
     {
       text: "О нас",
+      refTo: RouterPaths.ABOUT,
     },
     {
       text: "Строительные материалы",
+      refTo: RouterPaths.MAIN,
     },
     {
-      text: "Контакты",
+      text: "Новинки",
+      refTo: RouterPaths.NEW_ITEMS,
     },
   ];
 
-  const navLinksFooter: IHeaderLink[] = [
+  const navLinksFooter: ILinkItem[] = [
     {
       text: "О нас",
+      refTo: RouterPaths.ABOUT,
     },
     {
       text: "Строительные и отделочные материалы",
+      refTo: RouterPaths.MAIN,
     },
     {
       text: "Доставка Стройматериалов",
+      refTo: RouterPaths.DELIVERY,
     },
     {
       text: "Оплата стройматериалов",
+      refTo: RouterPaths.PAYMENT,
     },
     {
       text: "Скидки на стройматериалы",
+      refTo: RouterPaths.SALES,
     },
     {
       text: "Производители",
+      refTo: RouterPaths.MANUFACTURERS,
     },
   ];
 

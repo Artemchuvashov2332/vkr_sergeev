@@ -1,12 +1,29 @@
 import { Route, Routes } from "react-router-dom";
 import { RouterPaths } from "../constants";
-import { MainPage, PaymentPage } from "../pages";
+import {
+  AboutPage,
+  DeliveryPage,
+  MainPage,
+  NewProductPage,
+  NotFoundPage,
+  PaymentPage,
+} from "../pages";
 
 export const Router = () => {
+  const componentByRouteDictionary = {
+    [RouterPaths.MAIN]: MainPage,
+    [RouterPaths.ABOUT]: AboutPage,
+    [RouterPaths.NEW_ITEMS]: NewProductPage,
+    [RouterPaths.PAYMENT]: PaymentPage,
+    [RouterPaths.DELIVERY]: DeliveryPage,
+    "*": NotFoundPage,
+  };
+
   return (
     <Routes>
-      <Route path={RouterPaths.MAIN} element={<MainPage />} />
-      <Route path={RouterPaths.PAYMENT} element={<PaymentPage />} />
+      {Object.entries(componentByRouteDictionary).map(([route, Component]) => (
+        <Route key={route} path={route} element={<Component />} />
+      ))}
     </Routes>
   );
 };

@@ -1,8 +1,9 @@
-import { FC, Fragment, useMemo } from "react";
+import { FC, useMemo } from "react";
 import { IFooterProps } from "./Footer.types";
 import "./Footer.style.css";
-import { AppContainer } from "../appContainer";
-import { Icon } from "..";
+import { AppContainer } from "../../ui/appContainer";
+import { Icon } from "../../ui";
+import { Link } from "react-router-dom";
 
 export const Footer: FC<IFooterProps> = ({
   navLinks,
@@ -40,9 +41,9 @@ export const Footer: FC<IFooterProps> = ({
         <footer className="app-footer">
           <nav className="app-footer-navs">
             <ul className="app-footer_link-list">
-              {navLinks.map(({ text }) => (
+              {navLinks.map(({ text, refTo }) => (
                 <li className="app-footer_link">
-                  <a>{text}</a>
+                  <Link to={refTo}>{text}</Link>
                 </li>
               ))}
             </ul>

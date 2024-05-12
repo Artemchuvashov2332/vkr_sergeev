@@ -1,9 +1,7 @@
-export interface IFooterLink {
-    text: string
-}
+import { ILinkItem } from "../../types"
 
 export interface IFooterProps {
-    navLinks: IFooterLink[]
+    navLinks: ILinkItem[]
     address?: string,
     contacts?: {
         type: 'phone' | 'email',

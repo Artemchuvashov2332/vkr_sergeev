@@ -1,7 +1,8 @@
 import { FC } from "react";
 import { IHeaderProps } from "./Header.types";
 import "./Header.style.css";
-import { AppContainer, Container, Dropdown } from "..";
+import { AppContainer, Dropdown } from "../../ui";
+import { Link } from "react-router-dom";
 
 export const Header: FC<IHeaderProps> = ({ navLinks }) => {
   const options = [
@@ -23,9 +24,9 @@ export const Header: FC<IHeaderProps> = ({ navLinks }) => {
         <header className="app-header">
           <nav className="app-header-navs">
             <ul className="app-header_link-list">
-              {navLinks.map(({ text }) => (
-                <li className="app-header_link-list-item">
-                  <a>{text}</a>
+              {navLinks.map(({ text, refTo }) => (
+                <li key={text} className="app-header_link-list-item">
+                  <Link to={refTo}>{text}</Link>
                 </li>
               ))}
             </ul>

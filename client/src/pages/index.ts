@@ -1,2 +1,6 @@
 export * from './MainPage'
 export * from './PaymentPage'
+export * from './DeliveryPage'
+export * from './NewProductPage'
+export * from './AboutPage'
+export * from './NotFound'

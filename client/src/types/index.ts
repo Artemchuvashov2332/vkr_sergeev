@@ -1,1 +1,2 @@
-export * from './Options'
+export * from './options'
+export * from './links'
