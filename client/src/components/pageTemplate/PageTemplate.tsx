@@ -42,7 +42,33 @@ export const PageTemplate: FC<PropsWithChildren> = ({ children }) => {
       <main className="page-main">
         <AppContainer>{children}</AppContainer>
       </main>
-      <Footer navLinks={navLinksFooter} />
+      <Footer
+        navLinks={navLinksFooter}
+        address="Улица Пушкина, дом Колотушкина 4"
+        contacts={[
+          {
+            type: "phone",
+            value: "+7-(999)-999-99-99",
+          },
+          {
+            type: "email",
+            value: "gvemon@mail.ru",
+          },
+        ]}
+        socialLinks={[
+          {
+            text: "Whatsapp",
+            icon: "whatsapp",
+            value: "https://www.youtube.com/",
+          },
+          {
+            text: "Телеграм",
+            icon: "telegram",
+            value: "https://t.me/Chuvash_Artem",
+          },
+        ]}
+        additionalInfo="Я пидр"
+      />
     </div>
   );
 };
