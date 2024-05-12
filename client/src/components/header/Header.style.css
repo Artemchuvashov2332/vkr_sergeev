@@ -1,0 +1,19 @@
+.app-header {
+    background-color: var(--header-main-color);
+    padding: 10px;
+}
+
+.app-header-navs {
+    display: flex;
+    justify-content: space-between;
+}
+
+.app-header_link-list {
+    display: flex;
+    gap: 10px;
+}
+
+.app-header-user-section {
+    display: flex;
+    gap: 10px;
+}
