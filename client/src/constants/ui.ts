@@ -1,0 +1,1 @@
+export const UI_CONTAINER_MAX_WIDTH_PX = 1200

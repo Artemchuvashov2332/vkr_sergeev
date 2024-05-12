@@ -1,6 +1,6 @@
-import { PropsWithChildren } from "react";
+import { CSSProperties, PropsWithChildren } from "react";
 
-export interface IContainerProps extends PropsWithChildren {
+export type IContainerProps = PropsWithChildren & CSSProperties & {
     maxWidth?: number | string,
     maxHeight?: number | string,
     minHeight?: number | string,

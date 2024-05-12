@@ -1,11 +1,13 @@
-.app-header {
+.app-header-wrapper {
     background-color: var(--header-main-color);
     padding: 10px;
+    width: 100%;
 }
 
 .app-header-navs {
     display: flex;
     justify-content: space-between;
+    margin: 0 auto;
 }
 
 .app-header_link-list {
@@ -16,4 +18,9 @@
 .app-header-user-section {
     display: flex;
     gap: 10px;
+}
+
+.app-header_link-list-item,
+.app-header-user-section-item {
+    cursor: pointer;
 }

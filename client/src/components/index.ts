@@ -1,4 +1,6 @@
 export * from './container'
-export * from './pageWrapper'
+export * from './appContainer'
 export * from './header'
+export * from './footer'
 export * from './dropdown'
+export * from './pageTemplate'

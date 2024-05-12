@@ -1,6 +1,13 @@
-.App {
+.page {
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: var(--bg-main-color);
+    min-height: 100vh;
+}
+
+.page-main {
+    width: 100%;
+    margin: 15px 0;
+    flex-grow: 1;
 }

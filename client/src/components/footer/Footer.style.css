@@ -1,0 +1,13 @@
+.app-footer-wrapper {
+    width: 100%;
+    background-color: var(--footer-main-color);
+    padding: 10px 15px;
+}
+
+.app-footer_link-list {
+    color: #ffffff;
+    text-decoration: underline;
+    font-size: 1em;
+    font-weight: 400;
+    cursor: pointer;
+}
