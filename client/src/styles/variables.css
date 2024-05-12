@@ -1,5 +1,10 @@
 :root {
     --header-main-color: #ffffff;
     --bg-main-color: #f7f7f7;
-    --footer-main-color: #454552
+    --footer-main-color: #454552;
+    --min-desktop: 1200px;
+    --max-laptop: 992px;
+    --min-laptop: 768px;
+    --max-phone: 600px;
+    --min-phone: 320px;
 }

@@ -4,6 +4,7 @@ import "./Footer.style.css";
 import { AppContainer } from "../../ui/appContainer";
 import { Icon } from "../../ui";
 import { Link } from "react-router-dom";
+import { Navigation } from "../navigation";
 
 export const Footer: FC<IFooterProps> = ({
   navLinks,
@@ -39,15 +40,11 @@ export const Footer: FC<IFooterProps> = ({
     <div className="app-footer-wrapper">
       <AppContainer>
         <footer className="app-footer">
-          <nav className="app-footer-navs">
-            <ul className="app-footer_link-list">
-              {navLinks.map(({ text, refTo }) => (
-                <li className="app-footer_link">
-                  <Link to={refTo}>{text}</Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          <Navigation
+            links={navLinks}
+            listClassName="app-footer_link-list"
+            itemClassName="app-footer_link"
+          />
           <div className="app-footer_info">
             <span>Адрес: {address}</span>
             {contacts && (

@@ -79,7 +79,7 @@ export const PageTemplate: FC<PropsWithChildren> = ({ children }) => {
             value: "https://t.me/Chuvash_Artem",
           },
         ]}
-        additionalInfo="Я пидр"
+        // additionalInfo="Я пидр"
       />
     </div>
   );
