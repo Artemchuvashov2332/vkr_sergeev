@@ -7,6 +7,7 @@ import {
   NewProductPage,
   NotFoundPage,
   PaymentPage,
+  ProductListPage,
   ProductTypesPage,
 } from "../pages";
 
@@ -18,6 +19,7 @@ export const Router = () => {
     [RouterPaths.PAYMENT]: PaymentPage,
     [RouterPaths.DELIVERY]: DeliveryPage,
     ":category": ProductTypesPage,
+    ":caregory/:type": ProductListPage,
     "*": NotFoundPage,
   };
 
