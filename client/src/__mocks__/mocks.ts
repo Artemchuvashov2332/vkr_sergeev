@@ -1,5 +1,4 @@
-import { IProduct, IProductGroup } from "../types";
-import { DropdownOptionsType } from "../ui";
+import { IProduct, IProductGroup } from "../types";;
 
 export const categories: IProductGroup[] = [
     {
@@ -136,7 +135,7 @@ export const products: IProduct[] = [
     }
 ]
 
-export const categoryOptions: DropdownOptionsType[] = [
+export const categoryOptions = [
     {
         id: 1,
         label: "Стройматериалы",

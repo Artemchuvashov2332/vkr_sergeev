@@ -1,26 +1,19 @@
-import { FC, useState } from "react";
-import { IOptions } from "../../types";
+import { Children, FC, PropsWithChildren, useState } from "react";
 import { IDropdownProps } from "./Dropdown.types";
-import "./Dropdown.style.css";
 import { getClass } from "../../utils";
+import "./Dropdown.style.css";
 
-export const Dropdown: FC<IDropdownProps> = ({
+export const Dropdown: FC<IDropdownProps & PropsWithChildren> = ({
   title,
-  options,
   modifiers,
   memuModifiers,
-  onItemClick = () => {},
+  children,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<IOptions | null>(null);
 
   const toggleHandler = () => setIsOpen((state) => !state);
 
-  const onOptionClickHandler = (option: IOptions) => {
-    setSelectedOption(option);
-    setIsOpen(false);
-    onItemClick(option);
-  };
+  const onListClickHandler = () => setIsOpen(false);
 
   const mainClassName = getClass("dropdown_wrapper", modifiers);
   const memuClassName = getClass("dropdown_list-content", memuModifiers);
@@ -31,18 +24,12 @@ export const Dropdown: FC<IDropdownProps> = ({
       onMouseEnter={toggleHandler}
       onMouseLeave={toggleHandler}
     >
-      <div className="dropdown_header">{selectedOption?.label || title}</div>
+      <div className="dropdown_header">{title}</div>
       {isOpen && (
         <div className="dropdown_list-container">
-          <ul className={memuClassName}>
-            {options.map(({ id, label, value }) => (
-              <li
-                key={id}
-                className="dropdown_content-list-item"
-                onClick={() => onOptionClickHandler({ label, value })}
-              >
-                {label}
-              </li>
+          <ul className={memuClassName} onClick={onListClickHandler}>
+            {Children.map(children, (child) => (
+              <>{child}</>
             ))}
           </ul>
         </div>

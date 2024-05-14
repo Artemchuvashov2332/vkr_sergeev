@@ -1,0 +1,1 @@
+export { CategoryShopModule } from './CategoryShop.module'

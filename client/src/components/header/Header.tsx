@@ -1,12 +1,11 @@
-import { FC } from "react";
+import { FC, Fragment } from "react";
 import { IHeaderProps } from "./Header.types";
-import { AppContainer, Dropdown } from "../../ui";
+import { AppContainer, Dropdown, DropdownItem } from "../../ui";
 import { Navigation } from "..";
 import "./Header.style.css";
-import { DropdownOptionsType } from "../../ui";
 
 export const Header: FC<IHeaderProps> = ({ navLinks }) => {
-  const options: DropdownOptionsType[] = [
+  const options = [
     {
       id: 1,
       label: "Войти",
@@ -18,6 +17,10 @@ export const Header: FC<IHeaderProps> = ({ navLinks }) => {
       value: "sign_up",
     },
   ];
+
+  const onDropdownClickHandler = (value: string) => {
+    console.debug(value);
+  };
 
   return (
     <div className="app-header-wrapper">
@@ -31,7 +34,17 @@ export const Header: FC<IHeaderProps> = ({ navLinks }) => {
             />
             <div className="app-header-user-section">
               <span className="app-header-user-section-item">Закладки</span>
-              <Dropdown title="Личный кабинет" options={options} />
+              <Dropdown title="Личный кабинет">
+                {options.map(({ id, label, value }) => {
+                  return (
+                    <DropdownItem
+                      key={id}
+                      item={label}
+                      onClick={() => onDropdownClickHandler(value)}
+                    />
+                  );
+                })}
+              </Dropdown>
             </div>
           </div>
         </header>

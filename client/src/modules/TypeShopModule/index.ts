@@ -1,0 +1,1 @@
+export { TypeShopModule } from './TypeShopModule'

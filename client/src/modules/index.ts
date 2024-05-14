@@ -1,1 +1,2 @@
-export * from './CategoryBarModule'
+export * from './CategoryShopModule'
+export * from './TypeShopModule'

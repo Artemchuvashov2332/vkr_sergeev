@@ -1,12 +1,12 @@
 import { useMemo } from "react";
-import { productTypes, products } from "../../__mocks__/mocks";
-import { PageTemplate } from "../../components";
+import { productTypes } from "../../__mocks__/mocks";
+import { Navbar, PageTemplate } from "../../components";
 import { RouterPaths } from "../../constants";
-import { CatalogModule } from "../../modules";
+import { TypeShopModule } from "../../modules";
 import { ILinkItem } from "../../types";
 
 export const ProductTypesPage = () => {
-  const links: ILinkItem[] = useMemo(
+  const tabs: ILinkItem[] = useMemo(
     () => [
       {
         text: "Распродажа",
@@ -35,7 +35,8 @@ export const ProductTypesPage = () => {
   return (
     <PageTemplate>
       <h1>Строительные материалы</h1>
-      <CatalogModule links={links} items={productTypes} itemsType="types" />
+      <Navbar tabs={tabs} />
+      <TypeShopModule items={productTypes} />
     </PageTemplate>
   );
 };
