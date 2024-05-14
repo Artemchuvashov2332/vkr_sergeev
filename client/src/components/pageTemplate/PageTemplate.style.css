@@ -11,3 +11,24 @@
     margin: 15px 0;
     flex-grow: 1;
 }
+
+.search-input {
+    padding: 6px 35px 6px 6px;
+    border-radius: 5px;
+    font-style: inherit;
+    font-size: inherit;
+}
+
+.search-input_wrapper {
+    float: right;
+    position: relative;
+}
+
+.search-input_icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 23px;
+    height: 23px;
+}

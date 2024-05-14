@@ -1,0 +1,4 @@
+.product-module {
+    display: flex;
+    flex-wrap: wrap;
+}

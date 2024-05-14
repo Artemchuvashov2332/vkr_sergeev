@@ -52,7 +52,19 @@ export const PageTemplate: FC<PropsWithChildren> = ({ children }) => {
     <div className="page">
       <Header navLinks={navLinksHeader} />
       <main className="page-main">
-        <AppContainer>{children}</AppContainer>
+        <AppContainer>
+          <div>
+            <div className="search-input_wrapper">
+              <input className="search-input" type="text" placeholder="Поиск" />
+              <img
+                className="search-input_icon"
+                src="../../assets/search_icon.svg"
+                alt="поиск"
+              />
+            </div>
+            {children}
+          </div>
+        </AppContainer>
       </main>
       <Footer
         navLinks={navLinksFooter}

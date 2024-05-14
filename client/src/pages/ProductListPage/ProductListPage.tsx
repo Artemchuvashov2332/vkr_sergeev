@@ -4,6 +4,7 @@ import { Navbar, PageTemplate } from "../../components";
 import { RouterPaths } from "../../constants";
 import { ProductListModule, TypeShopModule } from "../../modules";
 import { ILinkItem } from "../../types";
+import { finishingMaterials } from "../../__mocks__";
 
 export const ProductListPage = () => {
   const tabs: ILinkItem[] = useMemo(
@@ -36,7 +37,7 @@ export const ProductListPage = () => {
     <PageTemplate>
       <h1>Строительные материалы</h1>
       <Navbar tabs={tabs} />
-      <ProductListModule items={products} />
+      <ProductListModule items={finishingMaterials} />
     </PageTemplate>
   );
 };

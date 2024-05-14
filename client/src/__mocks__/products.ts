@@ -3,7 +3,7 @@ import { IProduct } from "../types";
 export const finishingMaterials: IProduct[] = [
     {
         id: 1,
-        imageSrc: "https://example.com/image1.jpg",
+        imageSrc: "https://нн-строй.рф/image/cache/data/keramogranit/plitka/ladoga-palevyj-keramicheskaja-plitka-shp200x300mm-300x300.jpg",
         title: "Керамическая плитка",
         description: "Прочная и стойкая к влаге плитка для отделки стен и полов.",
         rating: 4.5,
@@ -11,15 +11,15 @@ export const finishingMaterials: IProduct[] = [
     },
     {
         id: 2,
-        imageSrc: "https://example.com/image2.jpg",
+        imageSrc: "https://нн-строй.рф/image/cache/data/laminat/laminat_vintage_voyage_3003_dub_neapol_33klass-400x400.jpg",
         title: "Ламинат",
         description: "Имитация дерева, ламинат подходит для отделки пола в жилых помещениях.",
-        rating: "Отлично",
+        rating: 4.9,
         price: 700 // Цена в рублях
     },
     {
         id: 3,
-        imageSrc: "https://example.com/image3.jpg",
+        imageSrc: "https://cdn.leroymerlin.ru/lmru/image/upload/dpr_1.0/f_auto/q_auto/w_240/h_240/c_pad/b_white/d_photoiscoming.png/v1710746290/lmcode/yi9wFmF7Ok-z-yNHyHR0mQ/89363290.png",
         title: "Обои",
         description: "Разнообразие цветов и текстур, обои подойдут для отделки стен в любом интерьере.",
         rating: 4.0,
@@ -27,7 +27,7 @@ export const finishingMaterials: IProduct[] = [
     },
     {
         id: 4,
-        imageSrc: "https://example.com/image4.jpg",
+        imageSrc: "https://cdn.leroymerlin.ru/lmru/image/upload/f_auto/q_auto/dpr_1.0/c_pad/w_1000/h_1000/v1648462293/lmcode/dxNIVS-Aw0qLuy6hXknj2A/84389470.jpg",
         title: "Гипсокартон",
         description: "Универсальный материал для создания перегородок, потолков и декоративных элементов.",
         rating: 4.2,
@@ -35,10 +35,10 @@ export const finishingMaterials: IProduct[] = [
     },
     {
         id: 5,
-        imageSrc: "https://example.com/image5.jpg",
+        imageSrc: "https://cdn.leroymerlin.ru/lmru/image/upload/dpr_1.0/f_auto/q_auto/w_240/h_240/c_pad/b_white/d_photoiscoming.png/v1688383025/lmcode/d1wvLi5dSUm_r9-8EJpJTQ/82040394.jpg",
         title: "Плиточный клей",
         description: "Специальный клей для керамической плитки, обеспечивает надежное крепление.",
-        rating: "Хорошо",
+        rating: 4.1,
         price: 50 // Цена в рублях
     }
 ];
