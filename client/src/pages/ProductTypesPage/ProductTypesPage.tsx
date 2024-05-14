@@ -1,11 +1,11 @@
 import { useMemo } from "react";
-import { categories, products } from "../../__mocks__/mocks";
+import { productTypes, products } from "../../__mocks__/mocks";
 import { PageTemplate } from "../../components";
 import { RouterPaths } from "../../constants";
 import { CatalogModule } from "../../modules";
 import { ILinkItem } from "../../types";
 
-export const MainPage = () => {
+export const ProductTypesPage = () => {
   const links: ILinkItem[] = useMemo(
     () => [
       {
@@ -35,7 +35,7 @@ export const MainPage = () => {
   return (
     <PageTemplate>
       <h1>Строительные материалы</h1>
-      <CatalogModule links={links} items={categories} itemsType="category" />
+      <CatalogModule links={links} items={productTypes} itemsType="types" />
     </PageTemplate>
   );
 };

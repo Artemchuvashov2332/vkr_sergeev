@@ -1,6 +1,6 @@
-const productByCategory = ({ category }: { category: string }) => `/${category}`
+const productTypeByCategory = ({ category }: { category: string }) => `/${category}`
 
-const productByCategorySubtype = ({ category, subtype }: { category: string, subtype: string }) => `/${category}/${subtype}`
+const productByType = ({ category, subtype }: { category: string, subtype: string }) => `/${category}/${subtype}`
 
 const productItem = ({ id }: { id: number }) => `/product/${id}`
 
@@ -13,7 +13,7 @@ export const RouterPaths = {
     LIFTING_SERVICES: '/lifting_services',
     ABOUT: '/about',
     MANUFACTURERS: '/manufacturers',
-    productByCategory,
-    productByCategorySubtype,
+    productTypeByCategory,
+    productByType,
     productItem,
 } 

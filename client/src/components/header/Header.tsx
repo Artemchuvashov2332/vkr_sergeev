@@ -3,9 +3,10 @@ import { IHeaderProps } from "./Header.types";
 import { AppContainer, Dropdown } from "../../ui";
 import { Navigation } from "..";
 import "./Header.style.css";
+import { DropdownOptionsType } from "../../ui";
 
 export const Header: FC<IHeaderProps> = ({ navLinks }) => {
-  const options = [
+  const options: DropdownOptionsType[] = [
     {
       id: 1,
       label: "Войти",

@@ -7,6 +7,7 @@ import {
   NewProductPage,
   NotFoundPage,
   PaymentPage,
+  ProductTypesPage,
 } from "../pages";
 
 export const Router = () => {
@@ -16,6 +17,7 @@ export const Router = () => {
     [RouterPaths.NEW_ITEMS]: NewProductPage,
     [RouterPaths.PAYMENT]: PaymentPage,
     [RouterPaths.DELIVERY]: DeliveryPage,
+    ":category": ProductTypesPage,
     "*": NotFoundPage,
   };
 

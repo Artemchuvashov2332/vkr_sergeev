@@ -4,7 +4,6 @@
     flex-direction: column;
     gap: 6px;
     flex: 1 0 100%;
-    max-width: calc(25% - 20px);
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
@@ -57,22 +56,4 @@
 .product-rating,
 .product-price {
     font-size: 1rem;
-}
-
-@media (max-width: 992px) {
-    .product-card {
-        max-width: calc(33.33% - 20px);
-    }
-}
-
-@media (max-width: 768px) {
-    .product-card {
-        max-width: calc(50% - 20px);
-    }
-}
-
-@media (max-width: 600px) {
-    .product-card {
-        max-width: 100%;
-    }
 }

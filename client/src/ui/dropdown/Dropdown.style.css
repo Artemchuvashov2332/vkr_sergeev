@@ -10,6 +10,8 @@
 
 .dropdown_list-content {
     position: absolute;
+    top: 105%;
+    left: 0;
     background-color: #f9f9f9;
     min-width: 100%;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -20,10 +22,20 @@
     display: block;
     color: black;
     text-align: left;
-    padding: 5px;
+    padding: 10px;
     cursor: pointer;
 }
 
 .dropdown_content-list-item:hover {
     background-color: #f1f1f1;
+}
+
+.dropdown_wrapper--main-navbar-category-droppdown {
+    background: #4BA842;
+    padding: 10px 5px;
+    width: 25%;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    text-align: center;
 }

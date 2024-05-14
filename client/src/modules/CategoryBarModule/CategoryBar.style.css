@@ -1,0 +1,26 @@
+.main-navbar_wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 20px 5px;
+}
+
+.main-navbar {
+    display: flex;
+    background: #4BA842;
+    border-radius: 10px;
+    color: white;
+    overflow: hidden;
+}
+
+.main-navbar_item {
+    padding: 10px 5px;
+    width: 100%;
+    min-width: 130px;
+    text-align: center;
+    transition: all .2s ease-in-out;
+}
+
+.main-navbar_item:hover {
+    background: #51b948;
+}

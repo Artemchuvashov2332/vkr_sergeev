@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { IProduct } from "../../types";
-import "./Card.style.css";
+import { IProduct } from "../../../types";
+import "./ProductCard.style.css";
 
-export const Card: FC<IProduct> = ({
+export const PropductCard: FC<IProduct> = ({
   imageSrc,
   title,
   description,
