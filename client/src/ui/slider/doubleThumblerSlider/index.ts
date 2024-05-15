@@ -1,0 +1,1 @@
+export { DoubleThumblerSlider } from "./DoubleThumblerSlider";
