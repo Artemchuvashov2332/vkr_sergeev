@@ -11,8 +11,10 @@ export const Navigation: FC<INavigationProps> = ({
     <nav>
       <ul className={listClassName}>
         {links.map(({ text, refTo }) => (
-          <li key={text} className={itemClassName}>
-            <Link to={refTo}>{text}</Link>
+          <li key={text}>
+            <Link to={refTo}>
+              <p className={itemClassName}>{text}</p>
+            </Link>
           </li>
         ))}
       </ul>
