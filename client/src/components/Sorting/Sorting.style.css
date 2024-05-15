@@ -1,0 +1,13 @@
+.sorting {
+    width: 100%;
+    background-color: rgba(211, 211, 211, 0.2);
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    text-align: end;
+    margin-left: auto;
+    padding: 10px 5px;
+}
+
+.sorting_label {
+    margin-right: 15px;
+}

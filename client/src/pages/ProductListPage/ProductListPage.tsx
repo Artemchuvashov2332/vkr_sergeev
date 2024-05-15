@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import { products } from "../../__mocks__/mocks";
 import { Navbar, PageTemplate } from "../../components";
 import { RouterPaths } from "../../constants";
 import { ProductListModule, TypeShopModule } from "../../modules";

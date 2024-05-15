@@ -17,11 +17,11 @@ export const ProductListModule: FC<{ items: IProduct[] }> = ({ items }) => {
       <div className="w20">
         <Filter />
       </div>
-      <div className="w80">
+      <div className="w80 pl20">
         <Sorting />
         <List
           items={items}
-          modifiers="category"
+          modifiers="product"
           renderItem={(item) => (
             <PropductCard
               product={item}

@@ -24,7 +24,8 @@
     }
 }
 
-.list--category {
+.list--category,
+.list--product {
     display: grid;
     grid-auto-rows: 1fr;
     grid-template-columns: repeat(4, 1fr);
@@ -33,18 +34,24 @@
 }
 
 @media (max-width: 992px) {
+
+    .list--product,
     .list--category {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
 @media (max-width: 768px) {
+
+    .list--product,
     .list--category {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 600px) {
+
+    .list--product,
     .list--category {
         grid-template-columns: repeat(1, 1fr);
     }

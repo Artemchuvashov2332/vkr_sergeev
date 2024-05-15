@@ -68,7 +68,7 @@ export const PageTemplate: FC<PropsWithChildren> = ({ children }) => {
       </main>
       <Footer
         navLinks={navLinksFooter}
-        address="Улица Пушкина, дом Колотушкина 4"
+        address="ул. Кузбасская, 123, г. Нижний Новгород"
         contacts={[
           {
             type: "phone",
@@ -83,12 +83,12 @@ export const PageTemplate: FC<PropsWithChildren> = ({ children }) => {
           {
             text: "Whatsapp",
             icon: "whatsapp",
-            value: "https://www.youtube.com/",
+            value: "https://web.whatsapp",
           },
           {
             text: "Телеграм",
             icon: "telegram",
-            value: "https://t.me/Chuvash_Artem",
+            value: "https://t.me/telegram",
           },
         ]}
         // additionalInfo="Я пидр"
