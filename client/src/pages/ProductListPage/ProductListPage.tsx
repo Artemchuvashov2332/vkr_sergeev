@@ -36,7 +36,7 @@ export const ProductListPage = () => {
     <PageTemplate>
       <h1>Строительные материалы</h1>
       <Navbar tabs={tabs} />
-      <ProductListModule items={finishingMaterials} />
+      <ProductListModule />
     </PageTemplate>
   );
 };

@@ -1,22 +1,24 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import ReactSlider from "react-slider";
 import { IDoubleThumblerSliderProps } from "./DoubleThumblerSlider.types";
-import "./DoubleThumblerSlider.style.css"
+import "./DoubleThumblerSlider.style.css";
 
+//TODO должен быть контролируемым
 export const DoubleThumblerSlider: FC<IDoubleThumblerSliderProps> = ({
   limits,
   units = "",
+  onChange
 }) => {
-  const initialLimits = [limits.min, limits.max];
-  const [sliderLimits, setSliderLimits] = useState(initialLimits);
+  const { min, max } = limits;
+  const [sliderLimits, setSliderLimits] = useState([min, max]);
 
-  const onChangeHandler = (newValues: number[], indexThumd: number) => {
-    setSliderLimits((state) => {
-        const copyState = [...state];
-        copyState[indexThumd] = newValues[indexThumd];
-        return copyState;
-      });
-  }
+  const onChangeHandler = (newValues: number[]) => {
+    setSliderLimits(newValues)
+    onChange({
+      min: newValues[0],
+      max: newValues[1]
+    })
+  };
 
   return (
     <div className="slider-wrapper">
@@ -30,11 +32,14 @@ export const DoubleThumblerSlider: FC<IDoubleThumblerSliderProps> = ({
         className="horizontal-slider"
         thumbClassName="example-thumb"
         trackClassName="example-track"
-        defaultValue={initialLimits}
+        min={min}
+        max={max}
+        value={sliderLimits}
         ariaLabel={["Lower thumb", "Upper thumb"]}
         ariaValuetext={(state) => `Thumb value ${state.valueNow}`}
         renderThumb={(props) => <div {...props}></div>}
         pearling
+        step={10}
         minDistance={10}
         onChange={onChangeHandler}
       />

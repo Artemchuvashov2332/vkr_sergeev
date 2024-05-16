@@ -29,3 +29,35 @@
     padding: 10px;
     background-color: #ffffff;
 }
+
+.form-filter__footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+    color: #555555;
+    background-color: #f7f7f7;
+    border-top: 1px solid lightgray;
+}
+
+.form-filter__button {
+    width: calc(50% - 5px);
+    min-width: fit-content;
+    cursor: pointer;
+}
+
+.button-green {
+    background-color: #4BA842;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: white;
+}
+
+.button-border {
+    background-color: transparent;
+    border: 2px solid #4BA842;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: black;
+}

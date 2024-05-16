@@ -1,12 +1,13 @@
 import { FC } from "react";
 import { Filter, List, PropductCard, Sorting } from "../../components";
-import { IProduct } from "../../types";
 import { useNavigate } from "react-router-dom";
 import { RouterPaths } from "../../constants";
+import { getFiltredProduct, useAppSelector } from "../../store";
 import "./ProductList.style.css";
 
-export const ProductListModule: FC<{ items: IProduct[] }> = ({ items }) => {
+export const ProductListModule: FC = () => {
   const navigate = useNavigate();
+  const products = useAppSelector(getFiltredProduct)
 
   const onClickCardhandler = (id: number) => {
     navigate(RouterPaths.productItem({ id }));
@@ -20,12 +21,12 @@ export const ProductListModule: FC<{ items: IProduct[] }> = ({ items }) => {
       <div className="w80 pl20">
         <Sorting />
         <List
-          items={items}
+          items={products}
           modifiers="product"
-          renderItem={(item) => (
+          renderItem={(product) => (
             <PropductCard
-              product={item}
-              onClick={() => onClickCardhandler(item.id)}
+              product={product}
+              onClick={() => onClickCardhandler(product.id)}
             />
           )}
         />

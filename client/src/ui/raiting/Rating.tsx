@@ -1,18 +1,18 @@
 import { FC } from "react";
 import { Icon } from "..";
-import "./Rating.style.css"
+import "./Rating.style.css";
 
 export const Rating: FC<{
   marks: number[];
+  onChange: (newMark: number) => void;
   sortBy?: "ascending" | "descending";
-}> = ({ marks, sortBy = "descending" }) => {
+}> = ({ marks, sortBy = "descending", onChange }) => {
   const sortMethod = {
     ascending: (a: number, b: number) => a - b,
     descending: (a: number, b: number) => b - a,
   };
 
   const sortedMarks = marks.sort(sortMethod[sortBy]);
-
   const maxMark = Math.max(...marks);
 
   return (
@@ -30,6 +30,7 @@ export const Rating: FC<{
               value={mark}
               className="radio-input"
               style={{ marginRight: 10 }}
+              onChange={(event) => onChange(Number(event.target.value))}
             />
             <span className="radio-checkmark"></span>
             {Array.from({ length: maxMark }).map((_, index) => {
