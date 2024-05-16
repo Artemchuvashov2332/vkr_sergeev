@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { productTypes } from "../../__mocks__/mocks";
+import { lumberProductTypes, productTypes } from "../../__mocks__/mocks";
 import { Navbar, PageTemplate } from "../../components";
 import { RouterPaths } from "../../constants";
 import { TypeShopModule } from "../../modules";
@@ -36,7 +36,7 @@ export const ProductTypesPage = () => {
     <PageTemplate>
       <h1>Строительные материалы</h1>
       <Navbar tabs={tabs} />
-      <TypeShopModule items={productTypes} />
+      <TypeShopModule items={lumberProductTypes} />
     </PageTemplate>
   );
 };

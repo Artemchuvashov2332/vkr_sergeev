@@ -21,7 +21,7 @@ export const TypeShopModule: FC<{ items: IProductGroup[] }> = ({ items }) => {
 
   return (
     <List<IProductGroup>
-      items={items}
+      items={category === "lumber" ? items : []}
       modifiers="types"
       renderItem={({ imageSrc, title, group }) => (
         <SimpleCard
