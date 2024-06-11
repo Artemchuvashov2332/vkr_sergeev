@@ -1,40 +1,83 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { getProducts, useAppSelector } from "../../../../store";
 import { DoubleThumblerSlider, Rating } from "../../../../ui";
 import { FilterField, FilterWrapper } from "../../../../components";
+import { useSearch } from "../../../../utils";
 
 const RATINGS_MARKS = [5, 4, 3, 2, 1];
 
-export const ProductFilter = () => {
-  const products = useAppSelector(getProducts);
+interface StateParams {
+  price: {
+    min: number;
+    max: number;
+  };
+  rating: number | null;
+}
 
-  const allProductsPrices = products.map(({ price }) => price);
-  const priceRange = useMemo(
-    () => ({
-      min: Math.min(...allProductsPrices) || 0,
-      max: Math.max(...allProductsPrices) || 0,
-    }),
-    [products]
-  );
+interface SearchParamsFilter {
+  price?: {
+    min?: string;
+    max?: string;
+  };
+  rating?: string;
+}
+
+export const ProductFilter = () => {
+  const [searchParams] = useSearch<SearchParamsFilter>();
+  const products = useAppSelector(getProducts);
 
   const initialState = {
     price: {
-      min: priceRange.min,
-      max: priceRange.max,
+      min: 0,
+      max: 0,
     },
-    raiting: null,
+    rating: null,
   };
 
-  const [selectedValues, setSelectedValues] = useState<{
-    price: {
-      min: number;
-      max: number;
+  const [selectedValues, setSelectedValues] =
+    useState<StateParams>(initialState);
+
+  const priceRange = useMemo(() => {
+    const allProductsPrices = products.map(({ price }) => price);
+    const hasPrices = allProductsPrices.length;
+
+    return {
+      min: hasPrices ? Math.min(...allProductsPrices) : 0,
+      max: hasPrices ? Math.max(...allProductsPrices) : 0,
     };
-    raiting: number | null;
-  }>(initialState);
+  }, [products]);
+
+  const onReset = () => {
+    setSelectedValues({
+      price: {
+        min: priceRange.min,
+        max: priceRange.max,
+      },
+      rating: null,
+    });
+  };
+
+  useEffect(() => {
+    setSelectedValues((state) => {
+      const params = {
+        price: {
+          min: Number(searchParams?.price?.min) || priceRange.min,
+          max: Number(searchParams?.price?.max) || priceRange.max,
+        },
+        rating: Number(searchParams?.rating) || state?.rating,
+      };
+
+      return params;
+    });
+  }, [
+    priceRange,
+    searchParams?.price?.min,
+    searchParams?.price?.max,
+    searchParams?.rating,
+  ]);
 
   const onChangeField = (
-    field: "price" | "raiting",
+    field: "price" | "rating",
     newValue:
       | {
           min: number;
@@ -49,8 +92,9 @@ export const ProductFilter = () => {
     <FilterWrapper
       title="Фильтр"
       filterName="products"
+      // @ts-expect-error
       selectedValues={selectedValues}
-      onResetFilter={() => setSelectedValues(initialState)}
+      onResetFilter={onReset}
     >
       <FilterField title="Цена">
         <DoubleThumblerSlider
@@ -62,9 +106,9 @@ export const ProductFilter = () => {
       </FilterField>
       <FilterField title="Рейтинг">
         <Rating
-          value={selectedValues.raiting}
+          value={selectedValues.rating}
           marks={RATINGS_MARKS}
-          onChange={(newMark) => onChangeField("raiting", newMark)}
+          onChange={(newMark) => onChangeField("rating", newMark)}
         />
       </FilterField>
     </FilterWrapper>

@@ -18,9 +18,7 @@ export const Header: FC<IHeaderProps> = ({ navLinks }) => {
     },
   ];
 
-  const onDropdownClickHandler = (value: string) => {
-    console.debug(value);
-  };
+  const onDropdownClickHandler = (value: string) => {};
 
   return (
     <div className="app-header-wrapper">

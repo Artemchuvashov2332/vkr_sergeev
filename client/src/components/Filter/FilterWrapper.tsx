@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren, useEffect } from "react";
 import { removeFilter, setFilter, useAppDispatch } from "../../store";
-import { useSearchParams } from "react-router-dom";
 import qs from "qs";
+import { useSearch } from "../../utils";
 import "./Filter.style.css";
 
 interface FilterComponentProps extends PropsWithChildren {
@@ -25,13 +25,15 @@ export const FilterWrapper: FC<FilterComponentProps> = ({
   onResetFilter,
 }) => {
   const dispatch = useAppDispatch();
-  const [searchParamsData, setSearchParamsData] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearch();
 
   useEffect(() => {
-    const searchParams: { key: string; value: string }[] = [];
-    searchParamsData.forEach((value, key) => {
-      searchParams.push({ key, value: decodeURIComponent(value) });
-    });
+    dispatch(
+      setFilter({
+        key: filterName,
+        values: searchParams,
+      })
+    );
 
     return () => {
       dispatch(
@@ -50,9 +52,9 @@ export const FilterWrapper: FC<FilterComponentProps> = ({
       })
     );
 
-    setSearchParamsData(
-      qs.stringify(selectedValues, { arrayFormat: "brackets" })
-    );
+    setSearchParams(qs.stringify(selectedValues, { arrayFormat: "brackets" }), {
+      replace: true,
+    });
     onApplyFilter?.();
   };
 
@@ -62,7 +64,7 @@ export const FilterWrapper: FC<FilterComponentProps> = ({
         key: filterName,
       })
     );
-    setSearchParamsData();
+    setSearchParams({}, { replace: true });
     onResetFilter?.();
   };
 

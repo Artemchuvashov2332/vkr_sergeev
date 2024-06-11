@@ -64,7 +64,7 @@ export const ledProducts: IProduct[] = [
   },
   {
     id: 2,
-    title: "Светодиодный светильник",
+    title: "Хуй светильник",
     description: "LED 595x595x19 36Вт 3000Лм 4000К матовый",
     imageSrc:
       "https://нн-строй.рф/image/cache/data/podvesnye-potolki/spo-6-36-4k-m-era-svetodiod-300x300.jpg",
