@@ -4,9 +4,10 @@ import "./Rating.style.css";
 
 export const Rating: FC<{
   marks: number[];
+  value: number | null;
   onChange: (newMark: number) => void;
   sortBy?: "ascending" | "descending";
-}> = ({ marks, sortBy = "descending", onChange }) => {
+}> = ({ value, marks, sortBy = "descending", onChange }) => {
   const sortMethod = {
     ascending: (a: number, b: number) => a - b,
     descending: (a: number, b: number) => b - a,
@@ -14,6 +15,11 @@ export const Rating: FC<{
 
   const sortedMarks = marks.sort(sortMethod[sortBy]);
   const maxMark = Math.max(...marks);
+
+  const onChangeHander = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = Number(event.target.value);
+    onChange(newValue);
+  };
 
   return (
     <div>
@@ -29,8 +35,9 @@ export const Rating: FC<{
               name="rating_marks"
               value={mark}
               className="radio-input"
+              checked={mark === value}
               style={{ marginRight: 10 }}
-              onChange={(event) => onChange(Number(event.target.value))}
+              onChange={onChangeHander}
             />
             <span className="radio-checkmark"></span>
             {Array.from({ length: maxMark }).map((_, index) => {

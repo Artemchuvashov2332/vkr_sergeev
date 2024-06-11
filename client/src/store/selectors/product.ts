@@ -3,13 +3,13 @@ import { RootState } from "../store";
 export const getProducts = (state: RootState) => state.products;
 
 export const getFiltredProduct = (state: RootState) => {
-  const { products, filter } = state;
+  const { products, filters } = state;
 
-  const productFilter = filter.find(({ key }) => key === "products");
+  const productFilter = filters.find(({ key }) => key === "products");
 
   if (productFilter) {
     const filtredProducts = products.filter((product) => {
-      return Object.entries(productFilter.fields).every(([key, value]) => {
+      return Object.entries(productFilter.values).every(([key, value]) => {
         console.debug({ key, value, product });
         if (key === "price") {
           // @ts-expect-error поправить

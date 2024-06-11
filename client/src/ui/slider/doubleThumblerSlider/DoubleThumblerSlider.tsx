@@ -3,30 +3,28 @@ import ReactSlider from "react-slider";
 import { IDoubleThumblerSliderProps } from "./DoubleThumblerSlider.types";
 import "./DoubleThumblerSlider.style.css";
 
-//TODO должен быть контролируемым
 export const DoubleThumblerSlider: FC<IDoubleThumblerSliderProps> = ({
   limits,
   units = "",
-  onChange
+  values = [limits.min, limits.max],
+  onChange,
 }) => {
   const { min, max } = limits;
-  const [sliderLimits, setSliderLimits] = useState([min, max]);
 
   const onChangeHandler = (newValues: number[]) => {
-    setSliderLimits(newValues)
     onChange({
       min: newValues[0],
-      max: newValues[1]
-    })
+      max: newValues[1],
+    });
   };
 
   return (
     <div className="slider-wrapper">
       <span className="slider-limit-label slider-limit-label__left">
-        {`${sliderLimits[0]} ${units}`}
+        {`${values[0]} ${units}`}
       </span>
       <span className="slider-limit-label slider-limit-label__right">
-        {`${sliderLimits[1]} ${units}`}
+        {`${values[1]} ${units}`}
       </span>
       <ReactSlider
         className="horizontal-slider"
@@ -34,7 +32,7 @@ export const DoubleThumblerSlider: FC<IDoubleThumblerSliderProps> = ({
         trackClassName="example-track"
         min={min}
         max={max}
-        value={sliderLimits}
+        value={values}
         ariaLabel={["Lower thumb", "Upper thumb"]}
         ariaValuetext={(state) => `Thumb value ${state.valueNow}`}
         renderThumb={(props) => <div {...props}></div>}

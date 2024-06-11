@@ -1,1 +1,2 @@
-export { Filter } from './Filter'
+export { FilterWrapper } from './FilterWrapper'
+export { FilterField } from './FilterField'

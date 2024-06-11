@@ -1,42 +1,38 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import _ from "lodash";
 
-// const initialState: IProduct[] = [];
+type FilterItemType = {
+  key: string,
+  values: Record<string, unknown>
+};
 
-interface IFilterItem {
-  key: string;
-  path: string;
-  fields: Record<string, unknown>;
-}
-
-export type IFIlter = IFilterItem[];
-
-const initialState: IFIlter = [];
+const initialState: FilterItemType[] = [];
 
 const filters = createSlice({
   name: "products",
   initialState: initialState,
   reducers: {
-    setFilter: (state, action: PayloadAction<IFilterItem>) => {
-      const filterInStoreIndex = state.findIndex(
-        (filter) => filter.key === action.payload.key
-      );
-      filterInStoreIndex !== -1
-        ? (state[filterInStoreIndex] = action.payload)
-        : state.push(action.payload);
+    setFilter: (state, action: PayloadAction<{ key: string, values: Record<string, unknown> }>) => {
+      const { key, values } = action.payload;
+      const currentFilterIndex = state.findIndex((filter) => filter.key === key);
+
+      currentFilterIndex === -1
+        ? state.push({ key, values })
+        : state[currentFilterIndex].values = values;
     },
-    clearFilter: (
+    removeFilter: (
       state,
-      action: PayloadAction<{ key: IFilterItem["key"] }>
+      action: PayloadAction<{ key: string }>
     ) => {
       const filtredState = state.filter(
         (filter) => filter.key !== action.payload.key
       );
       return filtredState;
     },
+    resetFilters: () => initialState
   },
 });
 
-export const { setFilter, clearFilter } = filters.actions;
+export const { setFilter, removeFilter, resetFilters } = filters.actions;
 
 export default filters.reducer;

@@ -1,3 +1,3 @@
-import filter from "./filters";
-export { filter };
-export { type IFIlter, setFilter, clearFilter } from "./filters";
+import filters from "./filters";
+export { filters };
+export { setFilter, removeFilter, resetFilters } from "./filters";
