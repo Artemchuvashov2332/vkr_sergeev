@@ -27,6 +27,7 @@ export const DoubleThumblerSlider: FC<IDoubleThumblerSliderProps> = ({
         {`${values[1]} ${units}`}
       </span>
       <ReactSlider
+        key="slider"
         className="horizontal-slider"
         thumbClassName="example-thumb"
         trackClassName="example-track"
@@ -35,7 +36,7 @@ export const DoubleThumblerSlider: FC<IDoubleThumblerSliderProps> = ({
         value={values}
         ariaLabel={["Lower thumb", "Upper thumb"]}
         ariaValuetext={(state) => `Thumb value ${state.valueNow}`}
-        renderThumb={(props) => <div {...props}></div>}
+        renderThumb={(props) => <div {...props} key={props.key}></div>}
         pearling
         step={10}
         minDistance={10}

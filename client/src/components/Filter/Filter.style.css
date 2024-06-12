@@ -52,6 +52,7 @@
     border-radius: 5px;
     padding: 5px 10px;
     color: white;
+    cursor: pointer;
 }
 
 .button-border {
@@ -60,4 +61,5 @@
     border-radius: 5px;
     padding: 5px 10px;
     color: black;
+    cursor: pointer;
 }

@@ -1,17 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { finishingMaterials, ledProducts } from "../../../__mocks__";
 import { IProduct } from "../../../types";
+import { fetchProductsThunk } from "./products.thunks";
 
 const initialState: IProduct[] = [];
 
 const products = createSlice({
   name: "products",
   initialState,
-  reducers: {
-    fakeFetchProducts: () => ledProducts
-  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchProductsThunk.fulfilled, (_, action) => action.payload)
+  }
 });
-
-export const { fakeFetchProducts } = products.actions
 
 export default products.reducer;

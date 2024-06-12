@@ -45,19 +45,3 @@
     min-width: fit-content;
     cursor: pointer;
 }
-
-.button-green {
-    background-color: #4BA842;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-    color: white;
-}
-
-.button-border {
-    background-color: transparent;
-    border: 2px solid #4BA842;
-    border-radius: 5px;
-    padding: 5px 10px;
-    color: black;
-}

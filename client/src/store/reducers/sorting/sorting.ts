@@ -11,10 +11,14 @@ const sorting = createSlice({
             state[key] = {
                 type
             }
+        },
+        removeSorting: (state, action: PayloadAction<any>) => {
+            const { key } = action.payload
+            delete state[key]
         }
     }
 })
 
-export const { setSorting } = sorting.actions
+export const { setSorting, removeSorting } = sorting.actions
 
 export default sorting.reducer

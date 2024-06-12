@@ -1,1 +1,1 @@
-export { RouterPaths } from './clientPaths'
+export * from './clientPaths'

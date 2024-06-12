@@ -34,7 +34,6 @@ export const ProductListPage = () => {
 
   return (
     <PageTemplate>
-      <h1>Строительные материалы</h1>
       <Navbar tabs={tabs} />
       <ProductListModule />
     </PageTemplate>

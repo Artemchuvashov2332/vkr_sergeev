@@ -28,7 +28,7 @@ export const Rating: FC<{
 
         // TODO сделать компонент кастомного чекбокса/радио
         return (
-          <label className="radio-container" htmlFor={htmlId}>
+          <label className="radio-container" htmlFor={htmlId} key={mark}>
             <input
               id={htmlId}
               type="radio"

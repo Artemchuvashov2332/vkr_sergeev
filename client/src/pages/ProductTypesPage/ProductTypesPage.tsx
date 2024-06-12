@@ -4,37 +4,35 @@ import { Navbar, PageTemplate } from "../../components";
 import { RouterPaths } from "../../constants";
 import { TypeShopModule } from "../../modules";
 import { ILinkItem } from "../../types";
+import { useParams } from "react-router-dom";
+import { usePageTitle } from "../../utils";
+
+const tabs: ILinkItem[] = [
+  {
+    text: "Распродажа",
+    refTo: RouterPaths.SALES,
+  },
+  {
+    text: "Новинки",
+    refTo: RouterPaths.NEW_ITEMS,
+  },
+  {
+    text: "Оплата",
+    refTo: RouterPaths.PAYMENT,
+  },
+  {
+    text: "Доставка",
+    refTo: RouterPaths.DELIVERY,
+  },
+  {
+    text: "Контакты",
+    refTo: RouterPaths.ABOUT,
+  },
+];
 
 export const ProductTypesPage = () => {
-  const tabs: ILinkItem[] = useMemo(
-    () => [
-      {
-        text: "Распродажа",
-        refTo: RouterPaths.SALES,
-      },
-      {
-        text: "Новинки",
-        refTo: RouterPaths.NEW_ITEMS,
-      },
-      {
-        text: "Оплата",
-        refTo: RouterPaths.PAYMENT,
-      },
-      {
-        text: "Доставка",
-        refTo: RouterPaths.DELIVERY,
-      },
-      {
-        text: "Контакты",
-        refTo: RouterPaths.ABOUT,
-      },
-    ],
-    [RouterPaths]
-  );
-
   return (
     <PageTemplate>
-      <h1>Строительные материалы</h1>
       <Navbar tabs={tabs} />
       <TypeShopModule items={lumberProductTypes} />
     </PageTemplate>

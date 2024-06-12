@@ -1,2 +1,2 @@
 export * from './getClass'
-export * from './location'
+export * from './hooks'

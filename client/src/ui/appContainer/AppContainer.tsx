@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren } from "react";
-import { Container, IContainerProps } from "../container";
+import { Container } from "../container";
 import "./PageWrapper.style.css";
 import { UI_CONTAINER_MAX_WIDTH_PX } from "../../constants/ui";
 

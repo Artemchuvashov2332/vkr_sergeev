@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import { getProducts, useAppSelector } from "../../../../store";
 import { DoubleThumblerSlider, Rating } from "../../../../ui";
 import { FilterField, FilterWrapper } from "../../../../components";
@@ -22,8 +22,8 @@ interface SearchParamsFilter {
   rating?: string;
 }
 
-export const ProductFilter = () => {
-  const [searchParams] = useSearch<SearchParamsFilter>();
+const ProductFilterComponent = () => {
+  const [parsedSearchParams] = useSearch<SearchParamsFilter>();
   const products = useAppSelector(getProducts);
 
   const initialState = {
@@ -45,7 +45,26 @@ export const ProductFilter = () => {
       min: hasPrices ? Math.min(...allProductsPrices) : 0,
       max: hasPrices ? Math.max(...allProductsPrices) : 0,
     };
-  }, [products]);
+  }, [products.length]);
+
+  useEffect(() => {
+    setSelectedValues((state) => {
+      const params = {
+        price: {
+          min: Number(parsedSearchParams?.price?.min) || priceRange.min,
+          max: Number(parsedSearchParams?.price?.max) || priceRange.max,
+        },
+        rating: Number(parsedSearchParams?.rating) || state?.rating,
+      };
+
+      return params;
+    });
+  }, [
+    priceRange,
+    parsedSearchParams?.price?.min,
+    parsedSearchParams?.price?.max,
+    parsedSearchParams?.rating,
+  ]);
 
   const onReset = () => {
     setSelectedValues({
@@ -56,25 +75,6 @@ export const ProductFilter = () => {
       rating: null,
     });
   };
-
-  useEffect(() => {
-    setSelectedValues((state) => {
-      const params = {
-        price: {
-          min: Number(searchParams?.price?.min) || priceRange.min,
-          max: Number(searchParams?.price?.max) || priceRange.max,
-        },
-        rating: Number(searchParams?.rating) || state?.rating,
-      };
-
-      return params;
-    });
-  }, [
-    priceRange,
-    searchParams?.price?.min,
-    searchParams?.price?.max,
-    searchParams?.rating,
-  ]);
 
   const onChangeField = (
     field: "price" | "rating",
@@ -114,3 +114,5 @@ export const ProductFilter = () => {
     </FilterWrapper>
   );
 };
+
+export const ProductFilter = memo(ProductFilterComponent);

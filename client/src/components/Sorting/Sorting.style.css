@@ -1,44 +1,58 @@
 .sorting {
-    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
     background-color: rgba(211, 211, 211, 0.2);
     border: 1px solid lightgray;
     border-radius: 3px;
-    text-align: end;
-    margin-left: auto;
-    padding: 10px 5px;
+    padding: 10px;
 }
 
 .sorting_label {
     margin-right: 10px;
 }
 
-.sort_select {
+.custom_select {
+    position: relative;
     width: 200px;
-    padding: 5px;
-    border-radius: 4px;
+    padding: 6px;
+    margin-right: 20px;
     border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #fff;
 }
 
-.sort_select:focus {
+.custom_select:focus-within,
+.custom_select.open {
     outline: 2px solid green;
 }
 
-.sort_select option {
-    padding: 10px;
-    font-size: 14px;
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
     background-color: #fff;
-    color: #000;
-}
-
-/* Adding a hover effect for options */
-.sort_select option:hover {
-    background-color: #f0f0f0;
-}
-
-.sort_option.unvisible {
+    max-height: 200px;
+    overflow-y: auto;
     display: none;
+    z-index: 1;
 }
 
-.sort_option {
+.dropdown.open {
+    display: block;
+}
+
+.dropdown_option {
+    padding: 10px;
     cursor: pointer;
+    background-color: #fff;
+}
+
+.dropdown_option:hover {
+    background-color: #f0f0f0;
 }

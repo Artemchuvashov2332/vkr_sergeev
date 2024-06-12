@@ -18,8 +18,9 @@ export const Router = () => {
     [RouterPaths.NEW_ITEMS]: NewProductPage,
     [RouterPaths.PAYMENT]: PaymentPage,
     [RouterPaths.DELIVERY]: DeliveryPage,
-    ":category": ProductTypesPage,
-    ":caregory/:type": ProductListPage,
+    [RouterPaths.SEARCH]: ProductListPage,
+    [RouterPaths.CATERORY]: ProductTypesPage,
+    [RouterPaths.TYPE]: ProductListPage,
     "*": NotFoundPage,
   };
 

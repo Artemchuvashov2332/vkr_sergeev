@@ -1,4 +1,6 @@
 .product-module {
     display: flex;
     flex-wrap: wrap;
+    position: relative;
+    min-height: 50vh;
 }

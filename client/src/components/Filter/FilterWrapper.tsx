@@ -3,6 +3,8 @@ import { removeFilter, setFilter, useAppDispatch } from "../../store";
 import qs from "qs";
 import { useSearch } from "../../utils";
 import "./Filter.style.css";
+// TODO переделать, когда будет компонент кнопки
+import "../Button/Button.style.css";
 
 interface FilterComponentProps extends PropsWithChildren {
   filterName: string;
@@ -25,23 +27,15 @@ export const FilterWrapper: FC<FilterComponentProps> = ({
   onResetFilter,
 }) => {
   const dispatch = useAppDispatch();
-  const [searchParams, setSearchParams] = useSearch();
+  const [parsedSearchParams, _, setSearchParams] = useSearch();
 
   useEffect(() => {
     dispatch(
       setFilter({
         key: filterName,
-        values: searchParams,
+        values: parsedSearchParams,
       })
     );
-
-    return () => {
-      dispatch(
-        removeFilter({
-          key: filterName,
-        })
-      );
-    };
   }, []);
 
   const onApplyFilterHandler = () => {
@@ -52,9 +46,15 @@ export const FilterWrapper: FC<FilterComponentProps> = ({
       })
     );
 
-    setSearchParams(qs.stringify(selectedValues, { arrayFormat: "brackets" }), {
-      replace: true,
-    });
+    setSearchParams(
+      qs.stringify(
+        { ...parsedSearchParams, ...selectedValues },
+        { arrayFormat: "brackets" }
+      ),
+      {
+        replace: true,
+      }
+    );
     onApplyFilter?.();
   };
 
@@ -64,7 +64,17 @@ export const FilterWrapper: FC<FilterComponentProps> = ({
         key: filterName,
       })
     );
-    setSearchParams({}, { replace: true });
+
+    Object.keys(selectedValues).forEach(
+      (key) => delete parsedSearchParams[key]
+    );
+
+    setSearchParams(
+      qs.stringify(parsedSearchParams, { arrayFormat: "brackets" }),
+      {
+        replace: true,
+      }
+    );
     onResetFilter?.();
   };
 
