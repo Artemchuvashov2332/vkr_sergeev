@@ -1,8 +1,11 @@
 import { PageTemplate } from "../../components";
+import { useGetPageTitleByRoute } from "../../utils";
 
 export const AboutPage = () => {
+  const title = useGetPageTitleByRoute();
+
   return (
-    <PageTemplate>
+    <PageTemplate title={title}>
       <p>
         Наш строительный магазин Сфера предлагает широкий ассортимент
         строительных материалов, инструментов и оборудования для профессионалов

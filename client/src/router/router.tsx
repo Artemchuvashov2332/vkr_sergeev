@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useParams } from "react-router-dom";
 import { RouterPaths } from "../constants";
 import {
   AboutPage,
@@ -8,6 +8,7 @@ import {
   NotFoundPage,
   PaymentPage,
   ProductListPage,
+  ProductPage,
   ProductTypesPage,
 } from "../pages";
 
@@ -21,6 +22,7 @@ export const Router = () => {
     [RouterPaths.SEARCH]: ProductListPage,
     [RouterPaths.CATERORY]: ProductTypesPage,
     [RouterPaths.TYPE]: ProductListPage,
+    [RouterPaths.PRODUCT]: ProductPage,
     "*": NotFoundPage,
   };
 

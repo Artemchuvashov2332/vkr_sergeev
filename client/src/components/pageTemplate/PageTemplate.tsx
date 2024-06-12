@@ -11,7 +11,7 @@ import { AppContainer } from "../../ui";
 import { RouterPaths } from "../../constants";
 import { ILinkItem } from "../../types";
 import { useNavigate } from "react-router-dom";
-import { usePageTitle } from "../../utils";
+import { useSetPageTitle } from "../../utils";
 
 const navLinksHeader: ILinkItem[] = [
   {
@@ -55,11 +55,13 @@ const navLinksFooter: ILinkItem[] = [
   },
 ];
 
-export const PageTemplate: FC<PropsWithChildren> = ({ children }) => {
-  const title = usePageTitle();
-
+export const PageTemplate: FC<{ title: string } & PropsWithChildren> = ({
+  title,
+  children,
+}) => {
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
+  useSetPageTitle(title);
 
   const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) =>
     setSearchValue(event.target.value);
@@ -121,7 +123,6 @@ export const PageTemplate: FC<PropsWithChildren> = ({ children }) => {
             value: "https://t.me/telegram",
           },
         ]}
-        // additionalInfo="Я пидр"
       />
     </div>
   );

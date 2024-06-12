@@ -1,5 +1,8 @@
 import { PageTemplate } from "../../components";
+import { useGetPageTitleByRoute } from "../../utils";
 
 export const PaymentPage = () => {
-  return <PageTemplate>Оплата</PageTemplate>;
+  const title = useGetPageTitleByRoute();
+
+  return <PageTemplate title={title}>Оплата</PageTemplate>;
 };

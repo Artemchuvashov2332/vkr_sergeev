@@ -1,53 +1,65 @@
 import qs from "qs";
 import { useEffect } from "react";
-import { SetURLSearchParams, useLocation, useParams, useSearchParams } from "react-router-dom";
+import {
+    SetURLSearchParams,
+    useLocation,
+    useParams,
+    useSearchParams,
+} from "react-router-dom";
 import { COMMON_PAGE_TITLE, RouterPaths } from "../../constants";
 import { categories, lumberProductTypes } from "../../__mocks__";
 
 interface SearchParams {
-    [key: string]: undefined | string | string[] | SearchParams | SearchParams[]
+    [key: string]: undefined | string | string[] | SearchParams | SearchParams[];
 }
 
-
-export const useSearch = <T = SearchParams>(): [T, URLSearchParams, SetURLSearchParams] => {
-    const location = useLocation()
+export const useSearch = <T = SearchParams>(): [
+    T,
+    URLSearchParams,
+    SetURLSearchParams
+] => {
+    const location = useLocation();
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const parsedSearch = qs.parse(location.search, { ignoreQueryPrefix: true }) as T;
+    const parsedSearch = qs.parse(location.search, {
+        ignoreQueryPrefix: true,
+    }) as T;
 
-    return [
-        parsedSearch,
-        searchParams,
-        setSearchParams,
-    ]
-}
+    return [parsedSearch, searchParams, setSearchParams];
+};
 
-export const usePageTitle = () => {
+export const useGetPageTitleByRoute = () => {
     const { pathname, search } = useLocation()
     const { category, type } = useParams<{ [key in string]: string }>()
     const parsedSearch = qs.parse(search, { ignoreQueryPrefix: true });
 
-
-    let title = ""
+    let title = "";
 
     if (pathname in COMMON_PAGE_TITLE) title = COMMON_PAGE_TITLE[pathname];
 
     if (category && !type) {
-        title = categories.find(({ group }) => group === category)?.title || ''
+        title = categories.find(({ group }) => group === category)?.title || "";
     }
 
     if (category && type) {
-        title = lumberProductTypes.find(({ group }) => group === type)?.title || ''
+        title = lumberProductTypes.find(({ group }) => group === type)?.title || "";
     }
 
     if (pathname === RouterPaths.SEARCH) {
-        const { value: searchValue } = parsedSearch
-        title = searchValue && searchValue !== 'all' ? `Поиск по товарам "${searchValue}"` : 'Все товары';
+        const { value: searchValue } = parsedSearch;
+        title =
+            searchValue && searchValue !== "all"
+                ? `Поиск по товарам "${searchValue}"`
+                : "Все товары";
     }
 
+    return title;
+};
+
+export const useSetPageTitle = (title: string) => {
     useEffect(() => {
-        document.title = title
-    }, [title])
+        document.title = title;
+    }, [document.title, title]);
 
     return title;
-}
+};

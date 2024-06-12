@@ -1,39 +1,37 @@
-import { useMemo } from "react";
 import { Navbar, PageTemplate } from "../../components";
 import { RouterPaths } from "../../constants";
-import { ProductListModule, TypeShopModule } from "../../modules";
+import { ProductListModule } from "../../modules";
 import { ILinkItem } from "../../types";
-import { finishingMaterials } from "../../__mocks__";
+import { useGetPageTitleByRoute } from "../../utils";
+
+const tabs: ILinkItem[] = [
+  {
+    text: "Распродажа",
+    refTo: RouterPaths.SALES,
+  },
+  {
+    text: "Новинки",
+    refTo: RouterPaths.NEW_ITEMS,
+  },
+  {
+    text: "Оплата",
+    refTo: RouterPaths.PAYMENT,
+  },
+  {
+    text: "Доставка",
+    refTo: RouterPaths.DELIVERY,
+  },
+  {
+    text: "Контакты",
+    refTo: RouterPaths.ABOUT,
+  },
+];
 
 export const ProductListPage = () => {
-  const tabs: ILinkItem[] = useMemo(
-    () => [
-      {
-        text: "Распродажа",
-        refTo: RouterPaths.SALES,
-      },
-      {
-        text: "Новинки",
-        refTo: RouterPaths.NEW_ITEMS,
-      },
-      {
-        text: "Оплата",
-        refTo: RouterPaths.PAYMENT,
-      },
-      {
-        text: "Доставка",
-        refTo: RouterPaths.DELIVERY,
-      },
-      {
-        text: "Контакты",
-        refTo: RouterPaths.ABOUT,
-      },
-    ],
-    [RouterPaths]
-  );
+  const title = useGetPageTitleByRoute();
 
   return (
-    <PageTemplate>
+    <PageTemplate title={title}>
       <Navbar tabs={tabs} />
       <ProductListModule />
     </PageTemplate>

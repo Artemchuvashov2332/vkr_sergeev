@@ -1,11 +1,9 @@
-import { useMemo } from "react";
-import { lumberProductTypes, productTypes } from "../../__mocks__/mocks";
+import { lumberProductTypes } from "../../__mocks__/mocks";
 import { Navbar, PageTemplate } from "../../components";
 import { RouterPaths } from "../../constants";
 import { TypeShopModule } from "../../modules";
 import { ILinkItem } from "../../types";
-import { useParams } from "react-router-dom";
-import { usePageTitle } from "../../utils";
+import { useGetPageTitleByRoute } from "../../utils";
 
 const tabs: ILinkItem[] = [
   {
@@ -31,8 +29,10 @@ const tabs: ILinkItem[] = [
 ];
 
 export const ProductTypesPage = () => {
+  const title = useGetPageTitleByRoute();
+
   return (
-    <PageTemplate>
+    <PageTemplate title={title}>
       <Navbar tabs={tabs} />
       <TypeShopModule items={lumberProductTypes} />
     </PageTemplate>

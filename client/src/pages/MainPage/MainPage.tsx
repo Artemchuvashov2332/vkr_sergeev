@@ -1,10 +1,9 @@
-import { useMemo } from "react";
 import { categories } from "../../__mocks__/mocks";
 import { Navbar, PageTemplate } from "../../components";
 import { RouterPaths } from "../../constants";
 import { CategoryShopModule } from "../../modules";
 import { ILinkItem } from "../../types";
-import { usePageTitle } from "../../utils";
+import { useGetPageTitleByRoute } from "../../utils";
 
 const tabs: ILinkItem[] = [
   {
@@ -30,8 +29,10 @@ const tabs: ILinkItem[] = [
 ];
 
 export const MainPage = () => {
+  const title = useGetPageTitleByRoute();
+
   return (
-    <PageTemplate>
+    <PageTemplate title={title}>
       <Navbar tabs={tabs} />
       <CategoryShopModule items={categories} />
     </PageTemplate>

@@ -1,0 +1,30 @@
+.clicker-wrapper {
+    display: inline-block;
+    background-color: #dfdfdf;
+    border-radius: 2px;
+    border: 1.5px solid #4BA842;
+    min-width: 100px;
+}
+
+.clicker-button {
+    background-color: #d6d6d6;
+    width: 30%;
+    max-width: 30px;
+    padding: 3px 5px;
+    border: none;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.clicker-button:hover {
+    background-color: #d0cdcd;
+}
+
+.clicker-value {
+    display: inline-block;
+    width: 40%;
+    max-width: 40%;
+    padding: 3px;
+    vertical-align: middle;
+    text-align: center;
+}

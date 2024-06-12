@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { removeSorting, setSorting, useAppDispatch } from "../../store";
 import "./Sorting.style.css";
-import "../Button/Button.style.css";
+import "../../ui/Button/Button.style.css";
 
 interface SortingProps {
   sortKey: string;

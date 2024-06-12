@@ -4,7 +4,7 @@ import qs from "qs";
 import { useSearch } from "../../utils";
 import "./Filter.style.css";
 // TODO переделать, когда будет компонент кнопки
-import "../Button/Button.style.css";
+import "../../ui/Button/Button.style.css";
 
 interface FilterComponentProps extends PropsWithChildren {
   filterName: string;

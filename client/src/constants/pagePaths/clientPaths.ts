@@ -20,6 +20,7 @@ export const RouterPaths = {
     SEARCH: '/search',
     CATERORY: '/catalog/:category',
     TYPE: '/catalog/:category/:type',
+    PRODUCT: '/product/:id',
     searchBy,
     productTypeByCategory,
     productByType,

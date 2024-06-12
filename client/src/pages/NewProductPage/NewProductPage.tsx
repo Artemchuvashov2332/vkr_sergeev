@@ -1,5 +1,8 @@
 import { PageTemplate } from "../../components";
+import { useGetPageTitleByRoute } from "../../utils";
 
 export const NewProductPage = () => {
-  return <PageTemplate>Новое</PageTemplate>;
+  const title = useGetPageTitleByRoute();
+
+  return <PageTemplate title={title}>Новое</PageTemplate>;
 };

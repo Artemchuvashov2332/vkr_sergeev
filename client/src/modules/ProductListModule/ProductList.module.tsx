@@ -44,7 +44,7 @@ export const ProductListModule: FC = () => {
   };
 
   return (
-    <div className="product-module">
+    <div className="product-list-module">
       <div className="w20">
         <ProductFilter />
       </div>
