@@ -1,7 +1,16 @@
 {
   "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
     "esModuleInterop": true,
-    "outDir": "dist",
-    "baseUrl": "."
-  }
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "rootDir": "./src"
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }

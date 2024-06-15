@@ -1,9 +1,10 @@
 import express from 'express';
+import { typeController } from '../controllers/typeController';
 const router = express.Router();
 
-router.post('/');
-router.get('/', (reg, res) => {
-    res.json({ message: "ALL Hui" })
-});
+router.get('/all', typeController.getAll);
+router.post('/', typeController.create);
+router.put('/', typeController.updateOne);
+router.delete('/', typeController.deleteOne)
 
 export { router as typeRouter }
