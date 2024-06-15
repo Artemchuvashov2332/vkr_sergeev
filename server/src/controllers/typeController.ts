@@ -1,27 +1,67 @@
-import { Request, Response, RequestHandler } from "express";
+import { NextFunction, Request, Response } from "express";
+import { ApiError } from "../error/ApiError";
+import { Type, Category } from "../models/models";
+import { v4 as uuidv4 } from "uuid";
+import path from "path";
 
 class TypeController {
+    async create(
+        req: Request<
+            unknown,
+            unknown,
+            { code: string; title: string; categoryId: number }
+        >,
+        res: Response,
+        next: NextFunction
+    ) {
+        try {
+            const { code, title, categoryId } = req.body;
 
-    async create(req: Request, res: Response) {
-        res.json({ message: 'hui_pizda_create' })
+            const category = await Category.findByPk(categoryId);
+            if (!category) {
+                return next(ApiError.badRequest("not fount correct category!"));
+            }
+
+            const { image } = req.files;
+            const file = Array.isArray(image) ? image[0] : image;
+            const fileName = uuidv4() + ".jpg";
+
+            const type = await Type.create({ code, title, image: fileName });
+            /// @ts-expect-error
+            await type.addCategories([category]);
+
+            file.mv(path.resolve(__dirname, "../..", "static", fileName));
+            return res.json(type);
+        } catch (e) {
+            next(ApiError.badRequest(e?.message));
+        }
     }
 
-    async getByCategory(req: Request, res: Response) {
-        res.json({ message: 'hui_pizda_create' })
+    async getByCategory(
+        req: Request<{ category: string }>,
+        res: Response,
+        next: NextFunction
+    ) {
+        try {
+            const { category } = req.params;
+            const type = await Type.findAndCountAll({ where: { code: category } });
+            return res.json(type);
+        } catch (e) {
+            next(ApiError.badRequest(e?.message));
+        }
     }
 
-    async getAll(req: Request, res: Response) {
-        res.json({ message: 'hui_pizda_getAll' })
+    async getAll(_req: Request, res: Response) {
+        const types = await Type.findAll();
+        res.json(types);
     }
 
     async updateOne(req: Request, res: Response) {
-        res.json({ message: 'hui_pizda_addOne' })
-
+        res.json({ message: "hui_pizda_addOne" });
     }
 
     async deleteOne(req: Request, res: Response) {
-        res.json({ message: 'hui_pizda_deleteOne' })
-
+        res.json({ message: "hui_pizda_deleteOne" });
     }
 }
 

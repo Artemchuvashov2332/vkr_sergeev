@@ -44,7 +44,7 @@ export const Type = sequelize.define('type', {
     image: { type: DataTypes.STRING, allowNull: false },
 })
 
-const TypeCategory = sequelize.define('type_category', {
+export const TypeCategory = sequelize.define('type_category', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 })
 
@@ -74,7 +74,7 @@ Rating.belongsTo(Product)
 Product.hasMany(BasketProduct)
 BasketProduct.belongsTo(Product)
 
-Product.hasMany(ProductInfo)
+Product.hasMany(ProductInfo, { as: 'info' })
 ProductInfo.belongsTo(Product)
 
 Type.belongsToMany(Category, { through: TypeCategory })

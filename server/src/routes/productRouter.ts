@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/', productController.getAll);
 router.get('/:id', productController.getOne);
-router.post('/', productController.create);
+router.post('/new', productController.create);
 router.put('/', productController.updateOne);
 router.delete('/', productController.deleteOne);
 

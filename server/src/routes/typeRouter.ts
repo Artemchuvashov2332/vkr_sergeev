@@ -3,7 +3,8 @@ import { typeController } from '../controllers/typeController';
 const router = express.Router();
 
 router.get('/all', typeController.getAll);
-router.post('/', typeController.create);
+router.get('/:category', typeController.getByCategory);
+router.post('/new', typeController.create);
 router.put('/', typeController.updateOne);
 router.delete('/', typeController.deleteOne)
 
