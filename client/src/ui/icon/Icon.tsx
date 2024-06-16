@@ -13,8 +13,6 @@ export const Icon: FC<IIconProps> = ({
 
   const onErrorHandler = () => setHasError(true);
 
-  console.debug({ name, hasError, throwDefaultIcon });
-
   if (hasError && throwDefaultIcon) {
     return (
       <img

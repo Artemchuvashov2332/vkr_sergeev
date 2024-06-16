@@ -1,18 +1,21 @@
 import { FC } from "react";
-import { IProduct } from "../../../types";
-import "./ProductCard.style.css";
 import { IProductCardProps } from "./ProductPropst.types";
+import "./ProductCard.style.css";
 
 export const PropductCard: FC<IProductCardProps> = ({ product, onClick }) => {
-  const { imageSrc, title, description, rating, price } = product;
+  const { name, image, rating, price, summaryDescription } = product;
 
   return (
     <div className="product-card" onClick={onClick}>
       <div className="product-image_wrapper">
-        <img src={imageSrc} alt={title} className="product-image" />
+        <img
+          src={`${process.env.REACT_APP_API_URL}/${image}`}
+          alt={name}
+          className="product-image"
+        />
       </div>
-      <h2 className="product-title">{title}</h2>
-      <p className="product-description">{description}</p>
+      <h2 className="product-title">{name}</h2>
+      <p className="product-description">{summaryDescription}</p>
       <div className="product-info">
         <span className="product-rating">Rating: {rating}</span>
         <span className="product-price">{price} руб.</span>

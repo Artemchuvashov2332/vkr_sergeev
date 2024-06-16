@@ -1,13 +1,18 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchProducts } from "../../../api/fakeApi/products";
-import { IProduct } from "../../../types";
+import { callAPI } from "../../../api";
+import qs from "qs";
 
-export const fetchProductsThunk = createAsyncThunk('products/fetchProducts',
-    async (params: { type?: string, search?: string } | undefined = {}, { rejectWithValue }) => {
-        try {
-            const { data } = await fetchProducts(params)
-            return data
-        } catch (error) {
-            return rejectWithValue(undefined)
-        }
-    })
+export const fetchProductsThunk = createAsyncThunk(
+  "products/fetchProducts",
+  async (
+    params: { type?: string; search?: string } | undefined = {},
+    { rejectWithValue }
+  ) => {
+    try {
+      const { data } = await callAPI.get(`api/product?${qs.stringify(params)}`);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);

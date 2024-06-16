@@ -14,7 +14,10 @@ import { ProductFilter } from "./components";
 import { useSearch } from "../../utils";
 
 export const ProductListModule: FC = () => {
-  const { type } = useParams<{ category: string; type: string }>();
+  const { type: typeCode } = useParams<{ category: string; type: string }>();
+  const types = useAppSelector((state) => state.types.items);
+  const dispatch = useAppDispatch();
+
   const [parsedSearchParams] = useSearch<{ value: string }>();
   const navigate = useNavigate();
 
@@ -26,7 +29,6 @@ export const ProductListModule: FC = () => {
       key: "products",
     });
   });
-  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const fetchParams = parsedSearchParams.value
@@ -34,10 +36,10 @@ export const ProductListModule: FC = () => {
           search: parsedSearchParams.value,
         }
       : {
-          type,
+          typeId: types.find(({ code }) => code === typeCode)?.id,
         };
     dispatch(fetchProductsThunk(fetchParams));
-  }, [type, parsedSearchParams.value]);
+  }, [typeCode, parsedSearchParams.value]);
 
   const onClickCardhandler = (id: number) => {
     navigate(RouterPaths.productItem({ id }));

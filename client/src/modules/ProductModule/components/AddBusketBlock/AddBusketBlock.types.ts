@@ -1,4 +1,5 @@
 export interface AddBusketBlockProps {
-    value: number
-    isInStock: boolean
+  itemPrice: number;
+  value: number;
+  amount: number;
 }

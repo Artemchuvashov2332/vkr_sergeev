@@ -9,8 +9,11 @@ const products = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchProductsThunk.fulfilled, (_, action) => action.payload)
-  }
+    builder.addCase(
+      fetchProductsThunk.fulfilled,
+      (_, action) => action.payload.rows
+    );
+  },
 });
 
 export default products.reducer;

@@ -1,16 +1,46 @@
 import { FC } from "react";
 import { Navigation } from "..";
-import { INavbarProps } from "./Navbar.types";
 import { Dropdown, DropdownItem } from "../../ui";
-import { categoryOptions } from "../../__mocks__";
-import "./Navbar.style.css";
 import { useNavigate } from "react-router-dom";
 import { RouterPaths } from "../../constants";
+import { useAppSelector } from "../../store";
+import { ILinkItem } from "../../types";
+import "./Navbar.style.css";
 
-export const Navbar: FC<INavbarProps> = ({ tabs }) => {
+const tabs: ILinkItem[] = [
+  {
+    text: "Распродажа",
+    refTo: RouterPaths.SALES,
+  },
+  {
+    text: "Новинки",
+    refTo: RouterPaths.NEW_ITEMS,
+  },
+  {
+    text: "Оплата",
+    refTo: RouterPaths.PAYMENT,
+  },
+  {
+    text: "Доставка",
+    refTo: RouterPaths.DELIVERY,
+  },
+  {
+    text: "Контакты",
+    refTo: RouterPaths.ABOUT,
+  },
+];
+
+export const Navbar: FC = () => {
   const navigate = useNavigate();
+  const { items: options } = useAppSelector((state) => state.categories);
 
-  const onDropdownClickHandler = (value: string) => {
+  const onDropdownClickHandler = () => {
+    console.debug("sdfsdf");
+    navigate(RouterPaths.MAIN);
+  };
+
+  const onDropdownItemClickHandler = (value: string) => {
+    console.debug("object");
     navigate(
       RouterPaths.productTypeByCategory({
         category: value,
@@ -24,12 +54,13 @@ export const Navbar: FC<INavbarProps> = ({ tabs }) => {
         title="Каталог товаров"
         modifiers="main-navbar-category-droppdown"
         memuModifiers="wide-menu"
+        onClick={onDropdownClickHandler}
       >
-        {categoryOptions.map(({ id, label, value }) => (
+        {options.map(({ id, code, title }) => (
           <DropdownItem
             key={id}
-            item={label}
-            onClick={() => onDropdownClickHandler(value)}
+            item={title}
+            onClick={() => onDropdownItemClickHandler(code)}
           />
         ))}
       </Dropdown>

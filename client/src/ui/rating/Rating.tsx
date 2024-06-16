@@ -1,11 +1,12 @@
 import { FC } from "react";
 import { Icon } from "..";
 import "./Rating.style.css";
+import { RatingStars } from "./RatingStars";
 
 export const Rating: FC<{
   marks: number[];
   value: number | null;
-  onChange: (newMark: number) => void;
+  onChange?: (newMark: number) => void;
   sortBy?: "ascending" | "descending";
 }> = ({ value, marks, sortBy = "descending", onChange }) => {
   const sortMethod = {
@@ -18,7 +19,7 @@ export const Rating: FC<{
 
   const onChangeHander = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = Number(event.target.value);
-    onChange(newValue);
+    onChange?.(newValue);
   };
 
   return (
@@ -40,17 +41,7 @@ export const Rating: FC<{
               onChange={onChangeHander}
             />
             <span className="radio-checkmark"></span>
-            {Array.from({ length: maxMark }).map((_, index) => {
-              return (
-                <Icon
-                  key={index}
-                  name={index + 1 <= mark ? "good_star" : "empty_start"}
-                  height={22}
-                  width={22}
-                  style={{ marginRight: 5 }}
-                />
-              );
-            })}
+            <RatingStars count={maxMark} rating={mark} />
           </label>
         );
       })}

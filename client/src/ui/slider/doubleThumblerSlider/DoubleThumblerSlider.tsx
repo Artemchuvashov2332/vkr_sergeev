@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import ReactSlider from "react-slider";
 import { IDoubleThumblerSliderProps } from "./DoubleThumblerSlider.types";
 import "./DoubleThumblerSlider.style.css";

@@ -1,54 +1,27 @@
-import { useEffect } from "react";
-import { categories } from "../../__mocks__/mocks";
+import { FC, useEffect } from "react";
 import { Navbar, PageTemplate } from "../../components";
-import { RouterPaths } from "../../constants";
 import { CategoryShopModule } from "../../modules";
-import { ILinkItem } from "../../types";
 import { useGetPageTitleByRoute } from "../../utils";
-import axios from "axios";
+import {
+  fetchAllCategoriesThunk,
+  useAppDispatch,
+  useAppSelector,
+} from "../../store";
 
-const tabs: ILinkItem[] = [
-  {
-    text: "Распродажа",
-    refTo: RouterPaths.SALES,
-  },
-  {
-    text: "Новинки",
-    refTo: RouterPaths.NEW_ITEMS,
-  },
-  {
-    text: "Оплата",
-    refTo: RouterPaths.PAYMENT,
-  },
-  {
-    text: "Доставка",
-    refTo: RouterPaths.DELIVERY,
-  },
-  {
-    text: "Контакты",
-    refTo: RouterPaths.ABOUT,
-  },
-];
-
-export const MainPage = () => {
+export const MainPage: FC = () => {
   const title = useGetPageTitleByRoute();
+  const { items: categories } = useAppSelector((state) => state.categories);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const fetchAllCategories = async () => {
-      try {
-        const { data } = await axios.get(`/api/category/all`, {
-          baseURL: "http://localhost:5000",
-        });
-        console.debug(data);
-      } catch (error) {}
-    };
-
-    fetchAllCategories();
+    if (!categories.length) {
+      dispatch(fetchAllCategoriesThunk());
+    }
   }, []);
 
   return (
     <PageTemplate title={title}>
-      <Navbar tabs={tabs} />
+      <Navbar />
       <CategoryShopModule items={categories} />
     </PageTemplate>
   );

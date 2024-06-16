@@ -1,8 +1,14 @@
-import { PageTemplate } from "../../components";
+import { FC } from "react";
+import { Navbar, PageTemplate } from "../../components";
 import { useGetPageTitleByRoute } from "../../utils";
 
-export const NewProductPage = () => {
+export const NewProductPage: FC = () => {
   const title = useGetPageTitleByRoute();
 
-  return <PageTemplate title={title}>Новое</PageTemplate>;
+  return (
+    <PageTemplate title={title}>
+      <Navbar />
+      Новое
+    </PageTemplate>
+  );
 };

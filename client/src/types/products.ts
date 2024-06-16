@@ -1,22 +1,27 @@
-export interface IProductGroup {
-    id: number,
-    imageSrc: string,
-    group: string,
-    title: string,
-}
-
 export interface IProduct {
-    id: number,
-    imageSrc: string,
-    title: string,
-    description: string,
-    rating: number | string,
-    price: number
+  id: number;
+  name: string;
+  price: number;
+  rating: number;
+  image: string;
+  typeId: number;
+  categoryId: number;
+  description: string;
+  amount: number;
+  summaryDescription?: string;
 }
 
-// export interface IProductSubTypes {
-//     id: number,
-//     imageSrc: string,
-//     type: string,
-//     title: string
-// }
+export interface IDetailedProduct extends IProduct {
+  characteristics: {
+    id: number;
+    title: string;
+    description: string;
+  }[];
+}
+
+export interface IProductGroup {
+  id: number;
+  code: string;
+  title: string;
+  image: string;
+}

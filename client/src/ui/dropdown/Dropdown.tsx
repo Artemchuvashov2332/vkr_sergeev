@@ -8,12 +8,18 @@ export const Dropdown: FC<IDropdownProps & PropsWithChildren> = ({
   modifiers,
   memuModifiers,
   children,
+  onClick,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleHandler = () => setIsOpen((state) => !state);
 
-  const onListClickHandler = () => setIsOpen(false);
+  const onListClickHandler = (
+    e: React.MouseEvent<HTMLUListElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    setIsOpen(false);
+  };
 
   const mainClassName = getClass("dropdown_wrapper", modifiers);
   const memuClassName = getClass("dropdown_list-content", memuModifiers);
@@ -23,6 +29,7 @@ export const Dropdown: FC<IDropdownProps & PropsWithChildren> = ({
       className={mainClassName}
       onMouseEnter={toggleHandler}
       onMouseLeave={toggleHandler}
+      onClick={onClick}
     >
       <div className="dropdown_header">{title}</div>
       {isOpen && (

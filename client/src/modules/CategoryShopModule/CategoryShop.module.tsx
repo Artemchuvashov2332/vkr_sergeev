@@ -1,7 +1,7 @@
 import { FC } from "react";
+import { useNavigate } from "react-router-dom";
 import { IProductGroup } from "../../types";
 import { List, SimpleCard } from "../../components";
-import { useNavigate } from "react-router-dom";
 import { RouterPaths } from "../../constants";
 
 export const CategoryShopModule: FC<{ items: IProductGroup[] }> = ({
@@ -9,23 +9,23 @@ export const CategoryShopModule: FC<{ items: IProductGroup[] }> = ({
 }) => {
   const navigate = useNavigate();
 
-  const onClickCardhandler = (group: IProductGroup["group"]) => {
+  const onClickCardhandler = (code: string) => {
     navigate(
       RouterPaths.productTypeByCategory({
-        category: group,
+        category: code,
       })
     );
   };
 
   return (
-    <List<IProductGroup>
+    <List
       items={items}
       modifiers="category"
-      renderItem={({ imageSrc, title, group }) => (
+      renderItem={({ image, title, code }) => (
         <SimpleCard
-          imageSrc={imageSrc}
+          imageSrc={`${process.env.REACT_APP_API_URL}/${image}`}
           title={title}
-          onClick={() => onClickCardhandler(group)}
+          onClick={() => onClickCardhandler(code)}
         />
       )}
     />

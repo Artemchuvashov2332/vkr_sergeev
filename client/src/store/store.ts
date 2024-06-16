@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { products, filters, sorting } from "./reducers";
+import { products, filters, sorting, categories, types } from "./reducers";
 
 const store = configureStore({
   reducer: {
     products,
     filters,
     sorting,
+    categories,
+    types,
   },
 });
 

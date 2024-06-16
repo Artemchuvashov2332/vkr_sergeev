@@ -11,6 +11,7 @@ import {
   ProductPage,
   ProductTypesPage,
 } from "../pages";
+import { SalesPage } from "../pages/SalesPage";
 
 export const Router = () => {
   const componentByRouteDictionary = {
@@ -23,6 +24,7 @@ export const Router = () => {
     [RouterPaths.CATERORY]: ProductTypesPage,
     [RouterPaths.TYPE]: ProductListPage,
     [RouterPaths.PRODUCT]: ProductPage,
+    [RouterPaths.SALES]: SalesPage,
     "*": NotFoundPage,
   };
 

@@ -1,11 +1,13 @@
-import { PageTemplate } from "../../components";
+import { FC } from "react";
+import { Navbar, PageTemplate } from "../../components";
 import { useGetPageTitleByRoute } from "../../utils";
 
-export const AboutPage = () => {
+export const AboutPage: FC = () => {
   const title = useGetPageTitleByRoute();
 
   return (
     <PageTemplate title={title}>
+      <Navbar />
       <p>
         Наш строительный магазин Сфера предлагает широкий ассортимент
         строительных материалов, инструментов и оборудования для профессионалов

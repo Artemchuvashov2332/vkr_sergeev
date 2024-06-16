@@ -1,1 +1,1 @@
-export { }
+export { callAPI } from "./config/axiosConfig";

@@ -8,26 +8,26 @@ export const TypeShopModule: FC<{ items: IProductGroup[] }> = ({ items }) => {
   const { category } = useParams<{ category: string }>();
   const navigate = useNavigate();
 
-  const onClickCardhandler = (group: IProductGroup["group"]) => {
+  const onClickCardhandler = (code: string) => {
     if (!category) return;
 
     navigate(
       RouterPaths.productByType({
         category,
-        subtype: group,
+        subtype: code,
       })
     );
   };
 
   return (
-    <List<IProductGroup>
-      items={category === "lumber" ? items : []}
+    <List
+      items={items}
       modifiers="types"
-      renderItem={({ imageSrc, title, group }) => (
+      renderItem={({ image, title, code }) => (
         <SimpleCard
-          imageSrc={imageSrc}
+          imageSrc={`${process.env.REACT_APP_API_URL}/${image}`}
           title={title}
-          onClick={() => onClickCardhandler(group)}
+          onClick={() => onClickCardhandler(code)}
         />
       )}
     />

@@ -1,57 +1,40 @@
-import { useEffect } from "react";
-import { lumberProductTypes } from "../../__mocks__/mocks";
+import { FC, useEffect, useState } from "react";
 import { Navbar, PageTemplate } from "../../components";
-import { RouterPaths } from "../../constants";
 import { TypeShopModule } from "../../modules";
-import { ILinkItem } from "../../types";
 import { useGetPageTitleByRoute } from "../../utils";
-import axios from "axios";
 import { useParams } from "react-router-dom";
+import {
+  fetchAllCategoriesThunk,
+  fetchTypesThunk,
+  getCategories,
+  useAppDispatch,
+  useAppSelector,
+} from "../../store";
 
-const tabs: ILinkItem[] = [
-  {
-    text: "Распродажа",
-    refTo: RouterPaths.SALES,
-  },
-  {
-    text: "Новинки",
-    refTo: RouterPaths.NEW_ITEMS,
-  },
-  {
-    text: "Оплата",
-    refTo: RouterPaths.PAYMENT,
-  },
-  {
-    text: "Доставка",
-    refTo: RouterPaths.DELIVERY,
-  },
-  {
-    text: "Контакты",
-    refTo: RouterPaths.ABOUT,
-  },
-];
-
-export const ProductTypesPage = () => {
-  const { category } = useParams<{ category: string }>();
+export const ProductTypesPage: FC = () => {
   const title = useGetPageTitleByRoute();
+  const { category: code } = useParams<{ category: string }>();
+  const { items: categories } = useAppSelector(getCategories);
+  const types = useAppSelector((state) => state.types.items);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const fetchAllCategories = async () => {
-      try {
-        const { data } = await axios.get(`/api/type/${category}`, {
-          baseURL: "http://localhost:5000",
-        });
-        console.debug(data);
-      } catch (error) {}
-    };
+    if (!categories.length) {
+      dispatch(fetchAllCategoriesThunk());
+    }
+    const categoryId = categories.find(
+      (category) => category.code === code
+    )?.id;
 
-    fetchAllCategories();
-  }, []);
+    if (!categoryId) return;
+
+    dispatch(fetchTypesThunk({ categoryId }));
+  }, [categories, code]);
 
   return (
     <PageTemplate title={title}>
-      <Navbar tabs={tabs} />
-      <TypeShopModule items={lumberProductTypes} />
+      <Navbar />
+      <TypeShopModule items={types} />
     </PageTemplate>
   );
 };

@@ -6,36 +6,63 @@ import { AddBusketBlockProps } from "./AddBusketBlock.types";
 import { getClass } from "../../../../utils";
 
 export const AddBusketBlock: FC<AddBusketBlockProps> = ({
+  itemPrice,
   value,
-  isInStock,
+  amount,
 }) => {
-  const [busketCount, setBusketCount] = useState(value);
+  const [state, setState] = useState({
+    totalCost: itemPrice,
+    busketCount: value,
+  });
   const [addToBusketCount, setAddToBusketCount] = useState(1);
+  const isInStock = amount > 0;
+
+  const onCountClickHandler = (count: number) => {
+    const newCost = count * itemPrice;
+    setState((state) => ({
+      ...state,
+      totalCost: newCost,
+    }));
+    setAddToBusketCount(count);
+  };
 
   return (
     <div className="add-block-wrapper">
-      <CounterClicker
-        initialValue={1}
-        min={1}
-        max={100}
-        onChange={setAddToBusketCount}
-      />
-      <Button
-        onClick={() => setBusketCount(addToBusketCount)}
-        disabled={!isInStock}
-      >
-        В корзину
-      </Button>
-      <span>Корзина: {busketCount}</span>
-      <div
-        className={getClass("add-block__in-stock", isInStock ? "green" : "red")}
-      >
-        <Icon
-          name={isInStock ? "good_check" : "cancel"}
-          height={15}
-          width={15}
+      <div className="add-block-section">
+        <span>Корзина: {state.busketCount}</span>
+        <CounterClicker
+          initialValue={1}
+          min={1}
+          max={amount}
+          onChange={onCountClickHandler}
         />
-        <span>{isInStock ? "Есть в наличии" : "Нет в наличии"}</span>
+        <Button
+          onClick={() =>
+            setState((state) => ({
+              ...state,
+              busketCount: addToBusketCount,
+            }))
+          }
+          disabled={addToBusketCount > amount}
+        >
+          В корзину
+        </Button>
+      </div>
+      <div className="add-block-section">
+        <p>Цена: {state.totalCost}₽</p>
+        <div
+          className={getClass(
+            "add-block__in-stock",
+            isInStock ? "green" : "red"
+          )}
+        >
+          <Icon
+            name={isInStock ? "good_check" : "cancel"}
+            height={15}
+            width={15}
+          />
+          <span>{isInStock ? `В наличии ${amount} шт.` : "Нет в наличии"}</span>
+        </div>
       </div>
     </div>
   );
