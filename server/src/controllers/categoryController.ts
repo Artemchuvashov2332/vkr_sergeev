@@ -26,9 +26,36 @@ class CategoryController {
     }
   }
 
-  async getAll(_req: Request, res: Response) {
-    const catogories = await Category.findAndCountAll();
-    return res.json(catogories);
+  async getOne(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+
+      const category = await Category.findByPk(id);
+
+      return res.json(category);
+    } catch (e) {
+      next(ApiError.badRequest(e?.message));
+    }
+  }
+
+  async getAll(req: Request, res: Response, next: NextFunction) {
+    try {
+      const limit = parseInt(req.query.limit as string, 10) || 10;
+      const offset = parseInt(req.query.offset as string, 10) || 0;
+
+      const { count, rows } = await Category.findAndCountAll({
+        limit,
+        offset,
+      });
+
+      res.header(
+        "Content-Range",
+        `categories ${offset}-${offset + rows.length - 1}/${count}`
+      );
+      return res.json({ count, rows });
+    } catch (e) {
+      next(ApiError.badRequest(e?.message));
+    }
   }
 
   async updateOne(req: Request, res: Response) {

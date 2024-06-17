@@ -49,9 +49,19 @@ class TypeController {
     }
   }
 
-  async getAll(_req: Request, res: Response) {
-    const types = await Type.findAll();
-    res.json(types);
+  async getAll(req: Request, res: Response) {
+    const limit = parseInt(req.query.limit as string, 10) || 10;
+    const offset = parseInt(req.query.offset as string, 10) || 0;
+    const { count, rows } = await Type.findAndCountAll({
+      limit,
+      offset,
+    });
+
+    res.header(
+      "Content-Range",
+      `categories ${offset}-${offset + rows.length - 1}/${count}`
+    );
+    res.json({ count, rows });
   }
 
   async updateOne(req: Request, res: Response) {

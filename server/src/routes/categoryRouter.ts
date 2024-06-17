@@ -1,10 +1,13 @@
-import express from 'express';
-import { categoryController } from '../controllers/categoryController'
+import express from "express";
+import { categoryController } from "../controllers/categoryController";
+import { checkForAdminRoleMiddleware } from "../middlewares/checkRoleMiddleware";
 const router = express.Router();
 
-router.get('/all', categoryController.getAll);
-router.post('/new', categoryController.create);
-router.put('/', categoryController.updateOne);
-router.delete('/', categoryController.deleteOne);
+router.get("/", categoryController.getAll);
+router.get("/:id", categoryController.getOne);
+// router.post("/", checkForAdminRoleMiddleware, categoryController.create);
+router.post("/", categoryController.create);
+router.put("/", checkForAdminRoleMiddleware, categoryController.updateOne);
+router.delete("/", checkForAdminRoleMiddleware, categoryController.deleteOne);
 
-export { router as categoryRouter }
+export { router as categoryRouter };

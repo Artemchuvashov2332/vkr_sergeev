@@ -8,7 +8,7 @@ export const fetchAllCategoriesThunk = createAsyncThunk(
   async (_a, { rejectWithValue }) => {
     try {
       const { data } = await callAPI.get<APIResponceWithCount<IProductGroup>>(
-        "/api/category/all"
+        "/api/category"
       );
       return data;
     } catch (error: unknown) {
