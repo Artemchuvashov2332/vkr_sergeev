@@ -35,7 +35,6 @@ export const Navbar: FC = () => {
   const { items: options } = useAppSelector((state) => state.categories);
 
   const onDropdownClickHandler = () => {
-    console.debug("sdfsdf");
     navigate(RouterPaths.MAIN);
   };
 

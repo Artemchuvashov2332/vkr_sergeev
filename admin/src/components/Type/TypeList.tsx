@@ -1,4 +1,4 @@
-import { Datagrid, DateField, List, TextField } from "react-admin";
+import { Datagrid, DateField, ImageField, List, TextField } from "react-admin";
 
 export const TypeList = () => (
   <List>
@@ -6,7 +6,7 @@ export const TypeList = () => (
       <TextField source="id" />
       <TextField source="code" />
       <TextField source="title" />
-      <TextField source="image" />
+      <ImageField source="image" title="desc" src="url" sortable={false} />
       <DateField source="createdAt" />
       <DateField source="updatedAt" />
     </Datagrid>

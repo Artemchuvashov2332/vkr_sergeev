@@ -34,6 +34,24 @@ class TypeController {
     }
   }
 
+  async getOne(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+
+      const type = await Type.findByPk(id);
+      const categoryTypes = await TypeCategory.findAll({
+        where: { typeId: id },
+      });
+
+      // @ts-expect-error
+      const categoryIds = categoryTypes.map((ct) => ct.categoryId);
+
+      return res.json({ ...type.dataValues, categoryIds });
+    } catch (e) {
+      next(ApiError.badRequest(e.message));
+    }
+  }
+
   async getByCategory(req: Request, res: Response, next: NextFunction) {
     try {
       const { categoryId } = req.query;

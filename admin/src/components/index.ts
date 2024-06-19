@@ -1,2 +1,2 @@
 export * from "./Category";
-export { TypeList } from "./TypeList";
+export * from "./Type";

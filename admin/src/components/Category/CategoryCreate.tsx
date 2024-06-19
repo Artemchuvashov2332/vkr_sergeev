@@ -2,18 +2,18 @@ import {
   Create,
   SimpleForm,
   TextInput,
-  FileInput,
-  FileField,
+  ImageInput,
+  ImageField,
 } from "react-admin";
 
 export const CategoryCreate = () => (
   <Create>
     <SimpleForm>
-      <TextInput source="code" />
-      <TextInput source="title" />
-      <FileInput source="image">
-        <FileField source="src" title="title" />
-      </FileInput>
+      <TextInput source="code" required />
+      <TextInput source="title" required />
+      <ImageInput source="image" label="Image" isRequired>
+        <ImageField source="src" title="title" />
+      </ImageInput>
     </SimpleForm>
   </Create>
 );

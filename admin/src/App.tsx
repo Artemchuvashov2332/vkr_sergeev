@@ -11,6 +11,7 @@ import {
   CategoryCreate,
   CategoryEdit,
   CategoryList,
+  TypeEdit,
   TypeList,
 } from "./components";
 
@@ -25,6 +26,12 @@ export const App = () => (
       edit={CategoryEdit}
       create={CategoryCreate}
     />
-    <Resource name="type" options={{ label: "Типы товаров" }} list={TypeList} />
+    <Resource
+      name="type"
+      options={{ label: "Типы товаров" }}
+      list={TypeList}
+      edit={TypeEdit}
+      create={ShowGuesser}
+    />
   </Admin>
 );

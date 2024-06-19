@@ -7,7 +7,17 @@ router.get("/", categoryController.getAll);
 router.get("/:id", categoryController.getOne);
 // router.post("/", checkForAdminRoleMiddleware, categoryController.create);
 router.post("/", categoryController.create);
-router.put("/", checkForAdminRoleMiddleware, categoryController.updateOne);
-router.delete("/", checkForAdminRoleMiddleware, categoryController.deleteOne);
+// router.put("/", checkForAdminRoleMiddleware, categoryController.updateOne);
+router.put("/:id", categoryController.updateOne);
+// router.delete(
+//   "/:id",
+//   checkForAdminRoleMiddleware,
+//   categoryController.deleteOne
+// );
+router.delete(
+  "/:id",
+  //   checkForAdminRoleMiddleware,
+  categoryController.deleteOne
+);
 
 export { router as categoryRouter };

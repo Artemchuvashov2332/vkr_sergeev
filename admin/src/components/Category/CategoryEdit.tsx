@@ -1,14 +1,25 @@
-import { DateInput, Edit, SimpleForm, TextInput } from "react-admin";
+import {
+  Edit,
+  ImageField,
+  ImageInput,
+  SimpleForm,
+  TextInput,
+} from "react-admin";
 
 export const CategoryEdit = () => (
   <Edit>
     <SimpleForm>
-      <TextInput source="id" />
-      <TextInput source="code" />
-      <TextInput source="title" />
-      <TextInput source="image" />
-      <DateInput source="createdAt" />
-      <DateInput source="updatedAt" />
+      <TextInput source="code" required />
+      <TextInput source="title" required />
+      <ImageField source="image" src="url" title="desc" label="Image" />
+      <ImageInput
+        source="image"
+        label="Image"
+        accept="image/*"
+        multiple={false}
+      >
+        <ImageField source="src" title="title" />
+      </ImageInput>
     </SimpleForm>
   </Edit>
 );

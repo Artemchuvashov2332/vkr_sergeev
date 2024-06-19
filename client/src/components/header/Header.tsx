@@ -31,7 +31,7 @@ export const Header: FC<IHeaderProps> = ({ navLinks }) => {
               itemClassName="app-header_link-list-item"
             />
             <div className="app-header-user-section">
-              <span className="app-header-user-section-item">Закладки</span>
+              <span className="app-header-user-section-item">Корзина</span>
               <Dropdown title="Личный кабинет">
                 {options.map(({ id, label, value }) => {
                   return (
