@@ -14,7 +14,7 @@ import {
 } from "../../store";
 import "./ProductList.style.css";
 import { ProductFilter } from "./components";
-import { useSearch } from "../../utils";
+import { isLoading, useSearch } from "../../utils";
 
 export const ProductListModule: FC = () => {
   const { category: categoryCode, type: typeCode } = useParams<{
@@ -27,6 +27,15 @@ export const ProductListModule: FC = () => {
 
   const [parsedSearchParams] = useSearch<{ value: string }>();
   const navigate = useNavigate();
+
+  const loaders = useAppSelector((state) => state.loaders);
+  const isLoadingData = isLoading(loaders, [
+    "fetchCategories",
+    "fetchTypes",
+    "fetchProducts",
+  ]);
+
+  console.debug({ isLoadingData });
 
   const products = useAppSelector((state) => {
     const filtredProducts = getFiltredProduct(state);
@@ -72,6 +81,14 @@ export const ProductListModule: FC = () => {
   const onClickCardhandler = (id: number) => {
     navigate(RouterPaths.productItem({ id }));
   };
+
+  if (isLoadingData) {
+    return (
+      <div className="product-list-module">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <div className="product-list-module">

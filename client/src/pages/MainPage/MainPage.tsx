@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react";
-import { Navbar, PageTemplate } from "../../components";
+import { Loader, Navbar, PageTemplate } from "../../components";
 import { CategoryShopModule } from "../../modules";
-import { useGetPageTitleByRoute } from "../../utils";
+import { isLoading, useGetPageTitleByRoute } from "../../utils";
 import {
   fetchAllCategoriesThunk,
   useAppDispatch,
@@ -13,11 +13,18 @@ export const MainPage: FC = () => {
   const { items: categories } = useAppSelector((state) => state.categories);
   const dispatch = useAppDispatch();
 
+  const loaders = useAppSelector((state) => state.loaders);
+  const isLoadingData = isLoading(loaders, "fetchCategories");
+
   useEffect(() => {
     if (!categories.length) {
       dispatch(fetchAllCategoriesThunk());
     }
-  }, []);
+  }, [categories]);
+
+  if (isLoadingData) {
+    return <Loader />;
+  }
 
   return (
     <PageTemplate title={title}>

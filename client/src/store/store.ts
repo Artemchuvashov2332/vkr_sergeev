@@ -1,5 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { products, filters, sorting, categories, types } from "./reducers";
+import {
+  products,
+  filters,
+  sorting,
+  categories,
+  types,
+  loaders,
+} from "./reducers";
 
 const store = configureStore({
   reducer: {
@@ -8,6 +15,7 @@ const store = configureStore({
     sorting,
     categories,
     types,
+    loaders,
   },
 });
 
