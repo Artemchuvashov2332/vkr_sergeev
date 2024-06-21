@@ -1,7 +1,9 @@
+import _ from "lodash";
+
 export const getSortedItem = <T>(
   item: T[],
-  field: string,
-  direction: "DESC" | "ASC"
+  field: string = "id",
+  direction: "DESC" | "ASC" = "ASC"
 ) => {
   return item.sort((a, b) => {
     const first = a[field];
@@ -15,4 +17,14 @@ export const getSortedItem = <T>(
 
     return sort[direction];
   });
+};
+
+export const parseData = (inputData) => {
+  const output: Record<string, any> = {};
+
+  Object.keys(inputData).forEach((key) => {
+    _.set(output, key, inputData[key]);
+  });
+
+  return output;
 };

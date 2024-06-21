@@ -68,9 +68,6 @@ BasketProduct.belongsTo(Basket);
 Type.hasMany(Product);
 Product.belongsTo(Type);
 
-Category.hasMany(Product);
-Product.belongsTo(Category);
-
 Product.hasMany(Rating);
 Rating.belongsTo(Product);
 

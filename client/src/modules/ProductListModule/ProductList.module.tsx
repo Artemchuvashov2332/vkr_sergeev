@@ -3,7 +3,10 @@ import { List, Loader, PropductCard, Sorting } from "../../components";
 import { useNavigate, useParams } from "react-router-dom";
 import { RouterPaths } from "../../constants";
 import {
+  fetchAllCategoriesThunk,
   fetchProductsThunk,
+  fetchTypesThunk,
+  getCategories,
   getFiltredProduct,
   getSortedItems,
   useAppDispatch,
@@ -14,7 +17,11 @@ import { ProductFilter } from "./components";
 import { useSearch } from "../../utils";
 
 export const ProductListModule: FC = () => {
-  const { type: typeCode } = useParams<{ category: string; type: string }>();
+  const { category: categoryCode, type: typeCode } = useParams<{
+    category: string;
+    type: string;
+  }>();
+  const { items: categories } = useAppSelector(getCategories);
   const types = useAppSelector((state) => state.types.items);
   const dispatch = useAppDispatch();
 
@@ -31,15 +38,36 @@ export const ProductListModule: FC = () => {
   });
 
   useEffect(() => {
-    const fetchParams = parsedSearchParams.value
-      ? {
-          search: parsedSearchParams.value,
-        }
-      : {
-          typeId: types.find(({ code }) => code === typeCode)?.id,
-        };
+    if (!categories.length) {
+      dispatch(fetchAllCategoriesThunk());
+    }
+  }, [categories]);
+
+  useEffect(() => {
+    const categoryId = categories.find(
+      (category) => category.code === categoryCode
+    )?.id;
+
+    if (!categoryId) return;
+
+    dispatch(fetchTypesThunk({ categoryId }));
+  }, [categories, categoryCode]);
+
+  useEffect(() => {
+    let fetchParams = {};
+
+    if (parsedSearchParams.value) {
+      fetchParams = {
+        search: parsedSearchParams.value,
+      };
+    } else if (types?.length) {
+      fetchParams = {
+        typeId: types.find(({ code }) => code === typeCode)?.id,
+      };
+    }
+
     dispatch(fetchProductsThunk(fetchParams));
-  }, [typeCode, parsedSearchParams.value]);
+  }, [types, typeCode, parsedSearchParams.value]);
 
   const onClickCardhandler = (id: number) => {
     navigate(RouterPaths.productItem({ id }));

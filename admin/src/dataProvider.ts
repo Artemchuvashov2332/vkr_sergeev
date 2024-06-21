@@ -1,7 +1,7 @@
 import { combineDataProviders, fetchUtils } from "react-admin";
 import simpleRestProvider from "ra-data-simple-rest";
 import qs from "qs";
-import { getImageUrl } from "./utils";
+import { convertToFormData, getImageUrl } from "./utils";
 
 const fetchJson = (url: string, options: fetchUtils.Options = {}) => {
   const customHeaders = (options.headers ||
@@ -36,18 +36,12 @@ export const categoryProvider = {
   getOne: (resource, params) => {
     const url = `${apiUrl}/${resource}/${params.id}`;
 
-    return httpClient(url).then(({ json }) => {
-      const test = {
-        data: {
-          ...json,
-          image: [{ url: getImageUrl(json.image), desc: json.title }],
-        },
-      };
-
-      console.debug(test);
-
-      return test;
-    });
+    return httpClient(url).then(({ json }) => ({
+      data: {
+        ...json,
+        image: [{ url: getImageUrl(json.image), desc: json.title }],
+      },
+    }));
   },
   getList: (resource, params) => {
     const { page, perPage } = params.pagination;
@@ -68,16 +62,16 @@ export const categoryProvider = {
     }));
   },
   getManyReference: (resource, params) => {
-    console.debug({ resource, params });
-
-    const url = `${apiUrl}/${resource}`;
+    const url = `${apiUrl}/${resource}/forTypes?${qs.stringify({
+      [params.target]: params.id,
+    })}`;
 
     return httpClient(url).then(({ json }) => ({
       data: json.rows.map((row) => ({
         ...row,
         image: [{ url: getImageUrl(row.image), desc: row.title }],
       })),
-      // total: json.count,
+      total: json.count,
     }));
   },
   update: (resource, params) => {
@@ -87,8 +81,6 @@ export const categoryProvider = {
     formData.append("code", params.data.code);
     formData.append("title", params.data.title);
     formData.append("image", params.data.image.rawFile);
-
-    console.debug(params.data);
 
     return httpClient(url, {
       method: "PUT",
@@ -117,18 +109,93 @@ export const typeProvider = {
   getOne: (resource, params) => {
     const url = `${apiUrl}/${resource}/${params.id}`;
 
-    return httpClient(url).then(({ json }) => {
-      const test = {
-        data: {
-          ...json,
-          image: [{ url: getImageUrl(json.image), desc: json.title }],
-        },
-      };
+    return httpClient(url).then(({ json }) => ({
+      data: {
+        ...json,
+        image: [{ url: getImageUrl(json.image), desc: json.title }],
+      },
+    }));
+  },
+  getList: (resource, params) => {
+    const { page, perPage } = params.pagination;
+    const { field, order } = params.sort;
+    const query = {
+      sort: JSON.stringify([field, order]),
+      range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
+      filter: JSON.stringify(params.filter),
+    };
+    const url = `${apiUrl}/${resource}?${qs.stringify(query)}`;
 
-      console.debug(test);
+    return httpClient(url).then(({ json }) => ({
+      data: json.rows.map((row) => ({
+        ...row,
+        image: [{ url: getImageUrl(row.image), desc: row.title }],
+      })),
+      total: json.count,
+    }));
+  },
+  getManyReference: (resource, params) => {
+    const url = `${apiUrl}/${resource}/forProducts?${qs.stringify({
+      [params.target]: params.id,
+    })}`;
 
-      return test;
+    return httpClient(url).then(({ json }) => ({
+      data: json.rows.map((row) => ({
+        ...row,
+        image: [{ url: getImageUrl(row.image), desc: row.title }],
+      })),
+      total: json.count,
+    }));
+  },
+  update: (resource, params) => {
+    const url = `${apiUrl}/${resource}/${params.id}`;
+
+    const formData = new FormData();
+    formData.append("code", params.data.code);
+    formData.append("title", params.data.title);
+    formData.append("image", params.data.image.rawFile);
+
+    return httpClient(url, {
+      method: "PUT",
+      body: formData,
+    }).then(({ json }) => ({
+      data: { ...params.data, id: json.id },
+    }));
+  },
+  updateTypeCategory: (resource, params) => {
+    const url = `${apiUrl}/${resource}/${params.typeId}/updateCategories`;
+
+    return httpClient(url, {
+      method: "PUT",
+      body: JSON.stringify(params),
     });
+  },
+};
+
+export const productProvider = {
+  ...baseDataProvider,
+  create: (resource, params) => {
+    const formData = convertToFormData({
+      ...params.data,
+      image: params.data.image.rawFile,
+    });
+
+    return httpClient(`${apiUrl}/${resource}`, {
+      method: "POST",
+      body: formData,
+    }).then(({ json }) => ({
+      data: { ...params.data, id: json.id },
+    }));
+  },
+  getOne: (resource, params) => {
+    const url = `${apiUrl}/${resource}/${params.id}`;
+
+    return httpClient(url).then(({ json }) => ({
+      data: {
+        ...json,
+        image: [{ url: getImageUrl(json.image), desc: json.title }],
+      },
+    }));
   },
   getList: (resource, params) => {
     const { page, perPage } = params.pagination;
@@ -151,12 +218,10 @@ export const typeProvider = {
   update: (resource, params) => {
     const url = `${apiUrl}/${resource}/${params.id}`;
 
-    const formData = new FormData();
-    formData.append("code", params.data.code);
-    formData.append("title", params.data.title);
-    formData.append("image", params.data.image.rawFile);
-
-    console.debug(params.data);
+    const formData = convertToFormData({
+      ...params.data,
+      image: params.data.image.rawFile,
+    });
 
     return httpClient(url, {
       method: "PUT",
@@ -164,6 +229,14 @@ export const typeProvider = {
     }).then(({ json }) => ({
       data: { ...params.data, id: json.id },
     }));
+  },
+  updateProductType: (resource, params) => {
+    const url = `${apiUrl}/${resource}/${params.productId}/updateType`;
+
+    return httpClient(url, {
+      method: "PUT",
+      body: JSON.stringify(params),
+    });
   },
 };
 
@@ -173,6 +246,8 @@ export const dataProvider = combineDataProviders((resource) => {
       return categoryProvider;
     case "type":
       return typeProvider;
+    case "product":
+      return productProvider;
     default:
       return baseDataProvider;
   }

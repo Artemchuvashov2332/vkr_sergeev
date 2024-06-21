@@ -1,13 +1,17 @@
 import express from "express";
 import { typeController } from "../controllers/typeController";
-import { checkForAdminRoleMiddleware } from "../middlewares/checkRoleMiddleware";
 const router = express.Router();
 
-router.get("/", typeController.getAll);
-router.get("/:id", typeController.getOne);
+router.get("/forProducts", typeController.getForProduct);
 router.get("/one", typeController.getByCategory);
-router.post("/new", checkForAdminRoleMiddleware, typeController.create);
-router.put("/", checkForAdminRoleMiddleware, typeController.updateOne);
-router.delete("/", checkForAdminRoleMiddleware, typeController.deleteOne);
+router.get("/:id", typeController.getOne);
+router.get("/", typeController.getAll);
+
+router.post("/", typeController.create);
+
+router.put("/:id/updateCategories", typeController.updateBindingCategory);
+router.put("/:id", typeController.updateOne);
+
+router.delete("/:id", typeController.deleteOne);
 
 export { router as typeRouter };

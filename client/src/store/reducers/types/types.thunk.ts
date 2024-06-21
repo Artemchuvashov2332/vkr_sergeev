@@ -20,10 +20,10 @@ export const fetchAllTypesThunk = createAsyncThunk(
 
 export const fetchTypesThunk = createAsyncThunk(
   "types/fetchTypes",
-  async (params: { categoryId?: number } = {}, { rejectWithValue }) => {
+  async ({ categoryId }: { categoryId: number }, { rejectWithValue }) => {
     try {
       const { data } = await callAPI.get<APIResponceWithCount<IProductGroup>>(
-        `api/type/one?${qs.stringify(params)}`
+        `api/type/one?${qs.stringify({ categoryId })}`
       );
       return data;
     } catch (error) {
